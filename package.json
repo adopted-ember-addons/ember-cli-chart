@@ -1,0 +1,25 @@
+{
+  "name": "ember-cli-chart",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ember component for ChartJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aomra015/ember-cli-chart.git"
+  },
+  "keywords": [
+    "ember-addon",
+    "ember-cli",
+    "chart"
+  ],
+  "author": "Ahmed Omran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aomra015/ember-cli-chart/issues"
+  },
+  "homepage": "https://github.com/aomra015/ember-cli-chart"
+}
