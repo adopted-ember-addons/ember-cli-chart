@@ -1,7 +1,6 @@
 {
   "name": "ember-cli-chart",
   "version": "1.0.0",
-  "private": true,
   "description": "Ember component for ChartJS",
   "main": "index.js",
   "scripts": {
