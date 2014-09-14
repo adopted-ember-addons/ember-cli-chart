@@ -15,5 +15,5 @@ export default Ember.Component.extend({
     var options = Ember.merge({}, this.get('options'));
 
     new Chart(context)[type](data, options);
-	}.observes('data')
+	}.observes('data', 'options')
 });
