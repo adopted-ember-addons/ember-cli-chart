@@ -1,6 +1,6 @@
 # Ember Chart
 
-This is an Ember-CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. 
+This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. 
 
 ### Installation
 
@@ -18,6 +18,12 @@ In your handlebars template just do:
 
 * CHARTTYPE: String; one of the following -- `Line`, `Bar`, `Radar`, `PolarArea`, `Pie` or `Doughnut`.
 * CHARTDATA: Array; refer to the ChartJS documentation
-* CHARTOPTIONS: Object; refer to the ChartJS documentation
+* CHARTOPTIONS: Object; refer to the ChartJS documentation. This is optional.
 * CHARTWIDTH: Number; pixel width of the canvas element
 * CHARTHEIGHT: Number; pixel height of the canvas element
+
+#### Example
+
+```
+{{ember-chart type='Pie' data=model.chartData width=200 height=200}}
+```
