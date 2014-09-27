@@ -12,6 +12,12 @@ export default Ember.Component.extend({
     var options = Ember.merge({}, this.get('options'));
 
     var chart = new Chart(context)[type](data, options);
+    
+    if (this.get('legend')) {
+      var legend = chart.generateLegend();
+      this.$().parent().append(legend);
+    };
+
     this.set('chart', chart);
   }.on('didInsertElement'),
 
