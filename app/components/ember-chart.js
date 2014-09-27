@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   renderChart: function(){
     var context = this.get('element').getContext('2d');
     var data = this.get('data');
-    var type = this.get('type').capitalize();
+    var type = this.get('type').classify();
     var options = Ember.merge({}, this.get('options'));
 
     var chart = new Chart(context)[type](data, options);

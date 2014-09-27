@@ -2,9 +2,17 @@
   "name": "ember-cli-chart",
   "version": "1.0.4",
   "description": "Ember component for ChartJS",
-  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ember server",
+    "build": "ember build",
+    "test": "ember test"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
   },
   "repository": {
     "type": "git",
@@ -20,5 +28,20 @@
   "bugs": {
     "url": "https://github.com/aomra015/ember-cli-chart/issues"
   },
-  "homepage": "https://github.com/aomra015/ember-cli-chart"
+  "homepage": "https://github.com/aomra015/ember-cli-chart",
+  "devDependencies": {
+    "body-parser": "^1.2.0",
+    "broccoli-asset-rev": "0.1.1",
+    "broccoli-ember-hbs-template-compiler": "^1.6.1",
+    "ember-cli": "0.0.46",
+    "ember-cli-ic-ajax": "0.1.1",
+    "ember-cli-inject-live-reload": "^1.0.2",
+    "ember-cli-qunit": "0.1.0",
+    "ember-data": "1.0.0-beta.10",
+    "express": "^4.8.5",
+    "glob": "^4.0.5"
+  },
+  "ember-addon": {
+    "configPath": "tests/dummy/config"
+  }
 }
