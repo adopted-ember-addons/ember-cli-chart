@@ -27,29 +27,29 @@ export default Ember.Component.extend({
 
   updateChart: function(){
     try {
-    	var self = this;
-    	this.get('data.datasets').forEach(function(dataset, i) {
-    		dataset.data.forEach(function(item, j) {
-				var chart = self.get('chart');
-			
-				if(typeof chart.datasets[i] === 'undefined') {
-					self.get('chart').segments[j].value = item;
-				} else {
-					var dataSet = self.get('chart').datasets[i];
-				
-					if(typeof dataSet.bars !== 'undefined') {
-						self.get('chart').datasets[i].bars[j].value = item;
-					} else {
-						self.get('chart').datasets[i].points[j].value = item;
-					}
-				}
-			});
-    	});
-    	this.get('chart').update();
+      var self = this;
+      this.get('data.datasets').forEach(function(dataset, i) {
+      	dataset.data.forEach(function(item, j) {
+	  var chart = self.get('chart');
+	  		
+	  if(typeof chart.datasets[i] === 'undefined') {
+	    self.get('chart').segments[j].value = item;
+	  } else {
+	    var dataSet = self.get('chart').datasets[i];
+	  
+	    if(typeof dataSet.bars !== 'undefined') {
+	      self.get('chart').datasets[i].bars[j].value = item;
+	    } else {
+	      self.get('chart').datasets[i].points[j].value = item;
+	    }
+	  }
+	});
+      });
+      this.get('chart').update();
     } catch(error) {
-    	Ember.warn('Dataset is not equal in structure as previous values. Rebuilding chart...');
-    	this.destroyChart();
-    	this.renderChart();
+      Ember.warn('Dataset is not equal in structure as previous values. Rebuilding chart...');
+      this.destroyChart();
+      this.renderChart();
     }
   }.observes('data', 'options')
 });
