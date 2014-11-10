@@ -22,6 +22,10 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   destroyChart: function(){
+    if (this.get('legend')) {
+      this.$().parent().children('[class$=legend]').remove();
+    };
+    
     this.get('chart').destroy();
   }.on('willDestroyElement'),
 
