@@ -33,19 +33,8 @@ export default Ember.Component.extend({
     try {
       var chart = this.get('chart');
       var data = this.get('data');
-      var needUpdate = false;
-      // Line, Bar and Radar charts
-      if (data.datasets) {
-        needUpdate = this.updateLinearCharts(data, chart)
-      }
-      else {
-        // Polar, Pie and Doughnut charts use an array as their data source
-        if (Array.isArray(data)) {
-          needUpdate = this.updatePieCharts(data, chart)
-        }
-      }
+      var needUpdate = this.updateChartBasedOnType(data, chart);
 
-      // only update if the data has changed
       if (needUpdate) {
         chart.update();
       }
@@ -57,8 +46,13 @@ export default Ember.Component.extend({
     }
   }.observes('data', 'data.[]', 'options'),
 
-  updateLinearCharts: function (data, chart) {
-    data.datasets.forEach(function(dataset, i) {
+  updateChartBasedOnType: function (data, chart) {
+    if (data.datasets) {return this.updateLinearCharts(data.datasets, chart)};
+    if (Array.isArray(data)) {return this.updatePieCharts(data, chart)};
+  },
+
+  updateLinearCharts: function (datasets, chart) {
+    datasets.forEach(function(dataset, i) {
       dataset.data.forEach(function(item, j) {
         item = item || 0;
         if (typeof chart.datasets[i] === 'undefined') {
@@ -93,6 +87,6 @@ export default Ember.Component.extend({
         needUpdate = true;
       }
     });
-    return needUpdate
+    return needUpdate;
   }
 });
