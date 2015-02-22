@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     var options = Ember.merge({}, this.get('options'));
 
     var chart = new Chart(context)[type](data, options);
-    
+
     if (this.get('legend')) {
       var legend = chart.generateLegend();
       this.$().parent().append(legend);
@@ -25,35 +25,68 @@ export default Ember.Component.extend({
     if (this.get('legend')) {
       this.$().parent().children('[class$=legend]').remove();
     };
-    
+
     this.get('chart').destroy();
   }.on('willDestroyElement'),
 
   updateChart: function(){
     try {
-      var self = this;
-      this.get('data.datasets').forEach(function(dataset, i) {
-      	dataset.data.forEach(function(item, j) {
-	  var chart = self.get('chart');
-	  		
-	  if(typeof chart.datasets[i] === 'undefined') {
-	    self.get('chart').segments[j].value = item;
-	  } else {
-	    var dataSet = self.get('chart').datasets[i];
-	  
-	    if(typeof dataSet.bars !== 'undefined') {
-	      self.get('chart').datasets[i].bars[j].value = item;
-	    } else {
-	      self.get('chart').datasets[i].points[j].value = item;
-	    }
-	  }
-	});
-      });
-      this.get('chart').update();
+      var chart = this.get('chart');
+      var data = this.get('data');
+      var needUpdate = this.updateChartBasedOnType(data, chart);
+
+      if (needUpdate) {
+        chart.update();
+      }
     } catch(error) {
       Ember.warn('Dataset is not equal in structure as previous values. Rebuilding chart...');
+      console.error(error);
       this.destroyChart();
       this.renderChart();
     }
-  }.observes('data', 'options')
+  }.observes('data', 'data.[]', 'options'),
+
+  updateChartBasedOnType: function (data, chart) {
+    if (data.datasets) {return this.updateLinearCharts(data.datasets, chart)};
+    if (Array.isArray(data)) {return this.updatePieCharts(data, chart)};
+  },
+
+  updateLinearCharts: function (datasets, chart) {
+    datasets.forEach(function(dataset, i) {
+      dataset.data.forEach(function(item, j) {
+        item = item || 0;
+        if (typeof chart.datasets[i] === 'undefined') {
+          chart.segments[j].value = item;
+        } else {
+          var dataSet = chart.datasets[i];
+
+          if(typeof dataSet.bars !== 'undefined') {
+            chart.datasets[i].bars[j].value = item;
+          } else {
+            chart.datasets[i].points[j].value = item;
+          }
+        }
+      });
+    });
+    return true;
+  },
+
+  updatePieCharts: function (data, chart) {
+    var needUpdate = false;
+    data.forEach(function(segment, i) {
+      if (typeof chart.segments[i] !== 'undefined') {
+        segment.value = segment.value || 0
+        if (chart.segments[i].value != segment.value) {
+          chart.segments[i].value = segment.value;
+          needUpdate = true;
+        }
+      }
+      else {
+        // there are now more segments than the chart knows about; add them
+        chart.addData(segment, i, true);
+        needUpdate = true;
+      }
+    });
+    return needUpdate;
+  }
 });
