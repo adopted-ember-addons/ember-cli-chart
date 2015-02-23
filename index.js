@@ -8,6 +8,6 @@ module.exports = {
     this.app = app;
     this._super.included(app);
 
-    app.import('vendor/chartjs/Chart.js');
+    app.import(app.bowerDirectory + '/chartjs/Chart.js');
   }
 };

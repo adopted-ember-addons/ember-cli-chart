@@ -1,11 +1,11 @@
 # Ember Chart
 
-This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. 
+This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. This addon has been tested on Ember-CLI v0.1.15.
 
 ### Installation
 
 ```
-$ npm install --save-dev ember-cli-chart
+$ ember install:npm ember-cli-chart
 ```
 
 ### Usage
