@@ -1,7 +1,7 @@
 module.exports = {
-  normalizeEntityName: function() {}, // no-op since we're just adding dependencies
+  normalizeEntityName: function() {},
 
   afterInstall: function() {
-    return this.addBowerPackageToProject('chartjs', '1.0.1'); // is a promise
+    return this.addBowerPackageToProject('chartjs', '1.0.1');
   }
 };
