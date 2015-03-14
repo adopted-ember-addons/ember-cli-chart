@@ -34,6 +34,35 @@ var ChartTestData = Ember.Object.extend({
     ];
   }.property('pieValue1', 'pieValue2', 'pieValue3'),
 
+  pieData2: function(){
+    return [
+      {
+        value: 300,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+      },
+      {
+        value: 50,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Green"
+      },
+      {
+        value: 100,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Yellow"
+      },
+      {
+        value: 20,
+        color: "#000000",
+        highlight: "#000000",
+        label: "Black"
+      }
+    ];
+  }.property(),
+
   lineValue1: 65,
   lineValue2: 59,
   lineData: function(){
@@ -152,7 +181,7 @@ test('it should update pie charts dynamically', function(assert) {
   assert.equal(chart.segments[0].value, 600);
 });
 
-test('it should update line charts dynamically', function(assert) {
+test('it should update charts dynamically', function(assert) {
   var component = this.subject({
     type: 'Line',
     data: testData.get('lineData')
@@ -168,4 +197,20 @@ test('it should update line charts dynamically', function(assert) {
 
   chart = component.get('chart');
   assert.equal(chart.datasets[0]['points'][0].value, 105);
+});
+
+test('it should update chart if data structure changes', function(assert) {
+  var component = this.subject({
+    type: 'Pie',
+    data: testData.get('pieData')
+  });
+
+  this.render();
+  var chart = component.get('chart');
+
+  // Update Data
+  component.set('data', testData.get('pieData2'));
+
+  chart = component.get('chart');
+  assert.equal(chart.segments[3].value, 20);
 });
