@@ -5,7 +5,7 @@ This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) compo
 ### Installation
 
 ```
-$ ember install:npm ember-cli-chart
+$ ember install:addon ember-cli-chart
 ```
 
 ### Usage
