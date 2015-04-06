@@ -11,7 +11,7 @@ var ChartTestData = Ember.Object.extend({
   pieValue1: 300,
   pieValue2: 50,
   pieValue3: 100,
-  pieData: function(){
+  pieData: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
     return [
       {
         value: parseInt(this.get('pieValue1')),
@@ -32,9 +32,9 @@ var ChartTestData = Ember.Object.extend({
         label: "Yellow"
       }
     ];
-  }.property('pieValue1', 'pieValue2', 'pieValue3'),
+  }),
 
-  pieData2: function(){
+  pieData2: Ember.computed(function(){
     return [
       {
         value: 300,
@@ -61,11 +61,11 @@ var ChartTestData = Ember.Object.extend({
         label: "Black"
       }
     ];
-  }.property(),
+  }),
 
   lineValue1: 65,
   lineValue2: 59,
-  lineData: function(){
+  lineData: Ember.computed('lineValue1', 'lineValue2', function(){
     return {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -91,7 +91,7 @@ var ChartTestData = Ember.Object.extend({
             }
         ]
     };
-  }.property('lineValue1', 'lineValue2')
+  })
 });
 
 var testData = ChartTestData.create();

@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   pieValue1: 300,
   pieValue2: 50,
   pieValue3: 100,
-  pieData: function(){
+  pieData: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
     return [
       {
         value: parseInt(this.get('pieValue1')),
@@ -25,10 +25,10 @@ export default Ember.Controller.extend({
         label: "Yellow"
       }
     ];
-  }.property('pieValue1', 'pieValue2', 'pieValue3'),
-    lineValue1: 65,
+  }),
+  lineValue1: 65,
   lineValue2: 59,
-  lineData: function(){
+  lineData: Ember.computed('lineValue1', 'lineValue2', function(){
     return {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -54,8 +54,8 @@ export default Ember.Controller.extend({
             }
         ]
     };
-  }.property('lineValue1', 'lineValue2'),
-    barData: {
+  }),
+  barData: {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
         {
@@ -75,8 +75,8 @@ export default Ember.Controller.extend({
             data: [28, 48, 40, 19, 86, 27, 90]
         }
     ]
-},
-    radarData: {
+  },
+  radarData: {
     labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
     datasets: [
         {
@@ -100,8 +100,8 @@ export default Ember.Controller.extend({
             data: [28, 48, 40, 19, 96, 27, 100]
         }
     ]
-},
-    polarAreaData: [
+  },
+  polarAreaData: [
     {
         value: 300,
         color:"#F7464A",
@@ -133,5 +133,5 @@ export default Ember.Controller.extend({
         label: "Dark Grey"
     }
 
-]
+  ]
 });

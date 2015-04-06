@@ -6,10 +6,10 @@ export default Ember.Component.extend({
   tagName: 'canvas',
   attributeBindings: ['width', 'height'],
 
-  renderChart: function(){
+  didInsertElement: function(){
     var context = this.get('element').getContext('2d');
     var data = this.get('data');
-    var type = this.get('type').classify();
+    var type = Ember.String.classify(this.get('type'));
     var options = Ember.merge({}, this.get('options'));
 
     var chart = new Chart(context)[type](data, options);
@@ -20,17 +20,17 @@ export default Ember.Component.extend({
     }
 
     this.set('chart', chart);
-  }.on('didInsertElement'),
+  },
 
-  destroyChart: function(){
+  willDestroyElement: function(){
     if (this.get('legend')) {
       this.$().parent().children('[class$=legend]').remove();
     }
 
     this.get('chart').destroy();
-  }.on('willDestroyElement'),
+  },
 
-  updateChart: function(){
+  updateChart: Ember.observer('data', 'data.[]', 'options', function(){
     var chart = this.get('chart');
     var data = this.get('data');
     var needUpdate = ChartDataUpdater.create({
@@ -39,5 +39,5 @@ export default Ember.Component.extend({
     }).updateByType();
 
     if (needUpdate) { chart.update(); }
-  }.observes('data', 'data.[]', 'options')
+  })
 });
