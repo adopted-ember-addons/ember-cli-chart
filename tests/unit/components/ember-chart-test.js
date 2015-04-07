@@ -206,11 +206,10 @@ test('it should update chart if data structure changes', function(assert) {
   });
 
   this.render();
-  var chart = component.get('chart');
 
   // Update Data
   component.set('data', testData.get('pieData2'));
 
-  chart = component.get('chart');
+  var chart = component.get('chart');
   assert.equal(chart.segments[3].value, 20);
 });

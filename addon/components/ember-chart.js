@@ -33,11 +33,16 @@ export default Ember.Component.extend({
   updateChart: Ember.observer('data', 'data.[]', 'options', function(){
     var chart = this.get('chart');
     var data = this.get('data');
-    var needUpdate = ChartDataUpdater.create({
+    var redraw = ChartDataUpdater.create({
       data: data,
       chart: chart
     }).updateByType();
 
-    if (needUpdate) { chart.update(); }
+    if (redraw) {
+      this.willDestroyElement();
+      this.didInsertElement();
+    } else {
+      chart.update();
+    }
   })
 });
