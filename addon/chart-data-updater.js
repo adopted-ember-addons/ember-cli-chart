@@ -37,20 +37,36 @@ export default Ember.Object.extend({
     var chart = this.get('chart');
     var needUpdate = false;
 
-    data.forEach(function(segment, i) {
-      if (typeof chart.segments[i] !== 'undefined') {
+    data.forEach(function(segment) {
+      var currentSegment = chart.segments.findBy('label', segment.label);
+      if(chart.segments.findBy('label', segment.label)) {
         segment.value = segment.value || 0;
-        if (chart.segments[i].value !== segment.value) {
-          chart.segments[i].value = segment.value;
+        if (currentSegment.value !== segment.value) {
+          currentSegment.value = segment.value;
           needUpdate = true;
         }
       }
       else {
-        // there are now more segments than the chart knows about; add them
+        // given data segment does not yet exist; add them
         chart.addData(segment, i, true);
         needUpdate = true;
       }
     });
+    
+  //remove segments no longer used
+	if(chart.segments.length !== data.length) {
+		var dataSegmentsLabels = data.mapBy('label');
+		
+		for(var i = 0; i < chart.segments.length; i++) {
+		  var currentSegment = chart.segments[i];
+		  if(!dataSegmentsLabels.contains(currentSegment.label)) {
+		    chart.segments.removeObject(currentSegment);
+			needUpdate = true;
+			i--;
+		  }
+		}
+	}
+    
     return needUpdate;
   }
 });
