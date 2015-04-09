@@ -48,7 +48,7 @@ export default Ember.Object.extend({
       }
       else {
         // given data segment does not yet exist; add them
-        chart.addData(segment, i, true);
+        chart.addData(segment, chart.segments.length, true);
         needUpdate = true;
       }
     });
