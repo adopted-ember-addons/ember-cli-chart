@@ -39,7 +39,7 @@ export default Ember.Object.extend({
 
     data.forEach(function(segment) {
       var currentSegment = chart.segments.findBy('label', segment.label);
-      if(chart.segments.findBy('label', segment.label)) {
+      if(currentSegment) {
         segment.value = segment.value || 0;
         if (currentSegment.value !== segment.value) {
           currentSegment.value = segment.value;
