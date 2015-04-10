@@ -37,28 +37,22 @@ var ChartTestData = Ember.Object.extend({
   pieData2: Ember.computed(function(){
     return [
       {
-        value: 300,
+        value: 20,
+        color: "#000000",
+        highlight: "#000000",
+        label: "Black"
+      },
+      {
+        value: 310,
         color:"#F7464A",
         highlight: "#FF5A5E",
         label: "Red"
       },
       {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: 100,
+        value: 101,
         color: "#FDB45C",
         highlight: "#FFC870",
         label: "Yellow"
-      },
-      {
-        value: 20,
-        color: "#000000",
-        highlight: "#000000",
-        label: "Black"
       }
     ];
   }),
@@ -211,5 +205,10 @@ test('it should update chart if data structure changes', function(assert) {
   component.set('data', testData.get('pieData2'));
 
   var chart = component.get('chart');
-  assert.equal(chart.segments[3].value, 20);
+  var segments = Ember.A(chart.segments);
+
+  assert.equal(segments.findBy('label', 'Red').value, 310);
+  assert.equal(segments.findBy('label', 'Yellow').value, 101);
+  assert.equal(segments.findBy('label', 'Black').value, 20);
+  assert.equal(segments.length, 3);
 });

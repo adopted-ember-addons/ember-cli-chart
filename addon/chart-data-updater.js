@@ -35,14 +35,25 @@ export default Ember.Object.extend({
   },
 
   updatePieCharts: function () {
-    var data = this.get('data');
+    var data = Ember.A(this.get('data'));
     var chart = this.get('chart');
+    var chartSegments = Ember.A(chart.segments);
 
-    data.forEach(function(segment, i) {
-      if (typeof chart.segments[i] !== 'undefined') {
-        chart.segments[i].value = segment.value || 0;
+    chart.segments.forEach(function(segment, i) {
+      var updatedSegment = data.findBy('label', segment.label);
+      if (updatedSegment) {
+        // Same segment exists in new data
+        chart.segments[i].value = updatedSegment.value || 0;
       } else {
-        chart.addData(segment, i, true);
+        // Segment does not exist anymore in new data
+        chart.removeData(i);
+      }
+    });
+
+    data.forEach(function(segment) {
+      var currentSegment = chartSegments.findBy('label', segment.label);
+      if (!currentSegment) {
+        chart.addData(segment);
       }
     });
   }
