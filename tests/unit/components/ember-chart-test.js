@@ -11,7 +11,7 @@ var ChartTestData = Ember.Object.extend({
   pieValue1: 300,
   pieValue2: 50,
   pieValue3: 100,
-  pieData: function(){
+  pieData: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
     return [
       {
         value: parseInt(this.get('pieValue1')),
@@ -32,40 +32,34 @@ var ChartTestData = Ember.Object.extend({
         label: "Yellow"
       }
     ];
-  }.property('pieValue1', 'pieValue2', 'pieValue3'),
+  }),
 
-  pieData2: function(){
+  pieData2: Ember.computed(function(){
     return [
-      {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-      },
-      {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      },
       {
         value: 20,
         color: "#000000",
         highlight: "#000000",
         label: "Black"
+      },
+      {
+        value: 310,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+      },
+      {
+        value: 101,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Yellow"
       }
     ];
-  }.property(),
+  }),
 
   lineValue1: 65,
   lineValue2: 59,
-  lineData: function(){
+  lineData: Ember.computed('lineValue1', 'lineValue2', function(){
     return {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -91,7 +85,7 @@ var ChartTestData = Ember.Object.extend({
             }
         ]
     };
-  }.property('lineValue1', 'lineValue2')
+  })
 });
 
 var testData = ChartTestData.create();
@@ -206,11 +200,15 @@ test('it should update chart if data structure changes', function(assert) {
   });
 
   this.render();
-  var chart = component.get('chart');
 
   // Update Data
   component.set('data', testData.get('pieData2'));
 
-  chart = component.get('chart');
-  assert.equal(chart.segments[3].value, 20);
+  var chart = component.get('chart');
+  var segments = Ember.A(chart.segments);
+
+  assert.equal(segments.findBy('label', 'Red').value, 310);
+  assert.equal(segments.findBy('label', 'Yellow').value, 101);
+  assert.equal(segments.findBy('label', 'Black').value, 20);
+  assert.equal(segments.length, 3);
 });

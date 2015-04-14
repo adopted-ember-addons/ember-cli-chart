@@ -2,12 +2,12 @@
 
 [![Build Status](https://travis-ci.org/aomra015/ember-cli-chart.svg)](https://travis-ci.org/aomra015/ember-cli-chart)
 
-This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. This addon is tested on Ember-CLI v0.2.1 and uses the `ember-try` addon to test against multiple Ember versions.
+This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. This addon is tested on Ember-CLI v0.2.3 and uses the `ember-try` addon to test against multiple Ember versions.
 
 ### Installation
 
 ```
-$ ember install:addon ember-cli-chart
+$ ember install ember-cli-chart
 ```
 
 ### Usage
