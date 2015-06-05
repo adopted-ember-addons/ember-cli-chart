@@ -15,12 +15,39 @@ export default Ember.Object.extend({
     var chart = this.get('chart');
     var self = this;
 
+	
+	//If new data has less columns
+    if (chart.datasets.length > datasets.length) {
+      var temp = Array();
+      chart.datasets.forEach(function(dataset, i) {
+		  //copy over only that amount
+        if (datasets[i]) {
+          temp.push(chart.datasets[i]);
+        }
+      });
+	  //and place into the chart data
+      chart.datasets = temp;
+    }
+
+	//If new data has more colmns
+    if (datasets.length > chart.datasets.length) {
+      var temp = Array();
+      datasets.forEach(function(dataset, i) {
+		  //Copy all those new columns
+          temp.push(datasets[i]);
+      });
+	  //Place in the chart
+      chart.datasets = temp;
+    }
+
+
+
     datasets.forEach(function(dataset, i) {
       var chartDataset = chart.datasets[i];
 
       try {
         dataset.data.forEach(function(item, j) {
-          item = item || 0;
+          item = item || 0; 
           if(typeof chartDataset.bars !== 'undefined') {
             chartDataset.bars[j].value = item;
           } else {
@@ -31,7 +58,10 @@ export default Ember.Object.extend({
         if (e instanceof TypeError) { self.set('redraw', true); }
         else { console.error(e); }
       }
+
     });
+	//Return the redraw flag
+    return this.get('redraw');
   },
 
   updatePieCharts: function () {
