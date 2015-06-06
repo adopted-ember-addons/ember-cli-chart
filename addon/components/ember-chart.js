@@ -16,6 +16,7 @@ export default Ember.Component.extend({
 
     if (this.get('legend')) {
       var legend = chart.generateLegend();
+      this.$().wrap("<div class='chart-parent'></div>");
       this.$().parent().append(legend);
     }
 

@@ -107,6 +107,19 @@ test('it can be a pie chart', function(assert) {
   assert.equal(chart.segments.length, 3);
 });
 
+test('it can be a pie chart with legend', function(assert) {
+  var component = this.subject({
+    type: 'Pie',
+    data: testData.get('pieData'),
+    legend: true
+  });
+
+  var chartParent = this.$().parent();
+
+  assert.ok(chartParent.hasClass('chart-parent'));
+  assert.ok(chartParent.find('.pie-legend').length);
+});
+
 test('it can be a line chart', function(assert) {
   var component = this.subject({
     type: 'Line',
