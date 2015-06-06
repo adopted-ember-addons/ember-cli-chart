@@ -1,10 +1,10 @@
-import Ember from 'ember';
 import {
   moduleForComponent,
   test
 } from 'ember-qunit';
+import Ember from 'ember';
 
-moduleForComponent('ember-chart');
+moduleForComponent('ember-chart', 'EmberChartComponent', {});
 
 // Test Data
 var ChartTestData = Ember.Object.extend({
