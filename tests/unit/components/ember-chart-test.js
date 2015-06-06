@@ -4,7 +4,9 @@ import {
 } from 'ember-qunit';
 import Ember from 'ember';
 
-moduleForComponent('ember-chart', 'EmberChartComponent', {});
+moduleForComponent('ember-chart', 'EmberChartComponent', {
+  unit: true
+});
 
 // Test Data
 var ChartTestData = Ember.Object.extend({
