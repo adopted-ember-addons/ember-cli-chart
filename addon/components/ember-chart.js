@@ -20,6 +20,9 @@ export default Ember.Component.extend({
     }
 
     this.set('chart', chart);
+    this.addObserver('data', this, this.updateChart);
+    this.addObserver('data.[]', this, this.updateChart);
+    this.addObserver('options', this, this.updateChart);
   },
 
   willDestroyElement: function(){
@@ -28,9 +31,12 @@ export default Ember.Component.extend({
     }
 
     this.get('chart').destroy();
+    this.removeObserver('data', this, this.updateChart);
+    this.removeObserver('data.[]', this, this.updateChart);
+    this.removeObserver('options', this, this.updateChart);
   },
 
-  updateChart: Ember.observer('data', 'data.[]', 'options', function(){
+  updateChart: function(){
     var chart = this.get('chart');
     var data = this.get('data');
     var redraw = ChartDataUpdater.create({
@@ -44,5 +50,5 @@ export default Ember.Component.extend({
     } else {
       chart.update();
     }
-  })
+  }
 });
