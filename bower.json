@@ -12,6 +12,6 @@
     "jquery": "^1.11.1",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
-    "chartjs": "1.0.1"
+    "chartjs": "1.0.2"
   }
 }
