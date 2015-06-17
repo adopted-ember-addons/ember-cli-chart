@@ -88,6 +88,43 @@ var ChartTestData = Ember.Object.extend({
             }
         ]
     };
+  }),
+  lineData2: Ember.computed(function(){
+    return {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [parseInt(this.get('lineValue1')), parseInt(this.get('lineValue2')), 80, 81, 56, 55, 40]
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            },
+            {
+                label: "My Third dataset",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+        ]
+    };
   })
 });
 
@@ -216,7 +253,7 @@ test('it should update charts dynamically', function(assert) {
   assert.equal(chart.scale.xLabels[0], 'December');
 });
 
-test('it should update chart if data structure changes', function(assert) {
+test('it should update pie chart if data structure changes', function(assert) {
   var component = this.subject({
     type: 'Pie',
     data: testData.get('pieData')
@@ -234,4 +271,21 @@ test('it should update chart if data structure changes', function(assert) {
   assert.equal(segments.findBy('label', 'Yellow').value, 101);
   assert.equal(segments.findBy('label', 'Black').value, 20);
   assert.equal(segments.length, 3);
+});
+
+test('it should update line chart if data structure changes', function(assert) {
+  var component = this.subject({
+    type: 'Line',
+    data: testData.get('lineData')
+  });
+
+  this.render();
+  var chart = component.get('chart');
+  assert.equal(chart.datasets.length, 2);
+
+  // Update Data
+  component.set('data', testData.get('lineData2'));
+
+  chart = component.get('chart');
+  assert.equal(chart.datasets.length, 3);
 });

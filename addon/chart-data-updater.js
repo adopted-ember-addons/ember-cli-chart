@@ -35,6 +35,8 @@ export default Ember.Object.extend({
         else { console.error(e); }
       }
     });
+
+    return this.get('redraw');
   },
 
   updatePieCharts: function () {
@@ -59,5 +61,8 @@ export default Ember.Object.extend({
         chart.addData(segment);
       }
     });
+
+    return this.get('redraw');
   }
+
 });
