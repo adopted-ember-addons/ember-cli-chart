@@ -12,8 +12,11 @@ export default Ember.Object.extend({
 
   updateLinearCharts: function () {
     var datasets = this.get('data').datasets;
+    var labels = this.get('data').labels;
     var chart = this.get('chart');
     var self = this;
+
+    chart.scale.xLabels = labels;
 
     datasets.forEach(function(dataset, i) {
       var chartDataset = chart.datasets[i];

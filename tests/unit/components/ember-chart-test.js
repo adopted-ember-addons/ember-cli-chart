@@ -59,11 +59,12 @@ var ChartTestData = Ember.Object.extend({
     ];
   }),
 
+  labelValue1: "January",
   lineValue1: 65,
   lineValue2: 59,
-  lineData: Ember.computed('lineValue1', 'lineValue2', function(){
+  lineData: Ember.computed('lineValue1', 'lineValue2', 'labelValue1', function(){
     return {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
         datasets: [
             {
                 label: "My First dataset",
@@ -206,6 +207,13 @@ test('it should update charts dynamically', function(assert) {
 
   chart = component.get('chart');
   assert.equal(chart.datasets[0]['points'][0].value, 105);
+
+  // Update Labels
+  testData.set('labelValue1', 'December');
+  component.set('data', testData.get('lineData'));
+
+  chart = component.get('chart');
+  assert.equal(chart.scale.xLabels[0], 'December');
 });
 
 test('it should update chart if data structure changes', function(assert) {
