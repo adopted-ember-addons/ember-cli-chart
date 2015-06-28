@@ -273,7 +273,7 @@ test('it should update pie chart if data structure changes', function(assert) {
   assert.equal(segments.length, 3);
 });
 
-test('it should update line chart if data structure changes', function(assert) {
+test('it should rebuild line chart if data structure changes', function(assert) {
   var component = this.subject({
     type: 'Line',
     data: testData.get('lineData')
@@ -283,9 +283,15 @@ test('it should update line chart if data structure changes', function(assert) {
   var chart = component.get('chart');
   assert.equal(chart.datasets.length, 2);
 
-  // Update Data
+  // Update Data -- increase dataset
   component.set('data', testData.get('lineData2'));
 
   chart = component.get('chart');
   assert.equal(chart.datasets.length, 3);
+
+  // Update Data -- decrease dataset
+  component.set('data', testData.get('lineData'));
+
+  chart = component.get('chart');
+  assert.equal(chart.datasets.length, 2);
 });

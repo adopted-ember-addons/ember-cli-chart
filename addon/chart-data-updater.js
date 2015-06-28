@@ -16,8 +16,14 @@ export default Ember.Object.extend({
     var chart = this.get('chart');
     var self = this;
 
+    if (chart.datasets.length !== datasets.length) {
+      return this.set('redraw', true);
+    }
+
+    // Update Labels
     chart.scale.xLabels = labels;
 
+    // Update dataset
     datasets.forEach(function(dataset, i) {
       var chartDataset = chart.datasets[i];
 
