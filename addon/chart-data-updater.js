@@ -18,6 +18,10 @@ export default Ember.Object.extend({
 
     if (chart.datasets.length !== datasets.length) {
       return this.set('redraw', true);
+    } else if (typeof chart.datasets[0].bars !== 'undefined') {
+      if (chart.datasets[0].bars.length !== datasets[0].data.length) {
+        return this.set('redraw', true);
+      }
     }
 
     // Update Labels
