@@ -146,7 +146,7 @@ test('it can be a pie chart', function(assert) {
 });
 
 test('it can be a pie chart with legend', function(assert) {
-  var component = this.subject({
+  this.subject({
     type: 'Pie',
     data: testData.get('pieData'),
     legend: true
