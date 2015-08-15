@@ -185,6 +185,23 @@ test('it can be a pie chart with legend', function(assert) {
   assert.ok(chartParent.find('.pie-legend').length);
 });
 
+test('it should rebuild the legend in case the chart changes', function(assert) {
+  var component = this.subject({
+    type: 'Pie',
+    data: testData.get('pieData'),
+    legend: true
+  });
+
+  var chartParent = this.$().parent();
+  
+  assert.ok(chartParent.find('.pie-legend').text().match(/Red/));
+
+  // Update Data
+  component.set('data', testData.get('pieData2'));
+  
+  assert.ok(chartParent.find('.pie-legend').text().match(/Black/), 'The legend should have updated');
+});
+
 test('it can be a line chart', function(assert) {
   var component = this.subject({
     type: 'Line',

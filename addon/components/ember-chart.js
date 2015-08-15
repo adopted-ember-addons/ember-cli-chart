@@ -51,5 +51,11 @@ export default Ember.Component.extend({
     } else {
       chart.update();
     }
+    
+    if (this.get('legend')) {
+      this.$().parent().children('[class$=legend]').remove();
+      var legend = chart.generateLegend();
+      this.$().parent().append(legend);
+    }
   }
 });
