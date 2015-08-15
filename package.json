@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-chart",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Ember component for ChartJS",
   "directories": {
     "doc": "doc",
