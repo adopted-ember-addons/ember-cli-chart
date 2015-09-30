@@ -126,6 +126,33 @@ var ChartTestData = Ember.Object.extend({
         ]
     };
   }),
+  lineData3: Ember.computed('lineValue1', 'lineValue2', 'labelValue1', function(){
+    return {
+        labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [parseInt(this.get('lineValue1')), parseInt(this.get('lineValue2')), 80, 81]
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+        ]
+    };
+  }),
   barData: Ember.computed(function(){
     return {
         labels: ["January", "February", "March"],
@@ -193,12 +220,12 @@ test('it should rebuild the legend in case the chart changes', function(assert) 
   });
 
   var chartParent = this.$().parent();
-  
+
   assert.ok(chartParent.find('.pie-legend').text().match(/Red/));
 
   // Update Data
   component.set('data', testData.get('pieData2'));
-  
+
   assert.ok(chartParent.find('.pie-legend').text().match(/Black/), 'The legend should have updated');
 });
 
@@ -355,4 +382,27 @@ test('it should rebuild bar chart if data structure changes', function(assert) {
 
   chart = component.get('chart');
   assert.equal(chart.datasets[0].bars.length, 3);
+});
+
+test('it should rebuild line chart if data length within a set changes', function(assert) {
+  var component = this.subject({
+    type: 'Line',
+    data: testData.get('lineData')
+  });
+
+  this.render();
+  var chart = component.get('chart');
+  assert.equal(chart.datasets[0].points.length, 7);
+
+  // Update Data -- increase dataset length for first array of points
+  component.set('data', testData.get('lineData3'));
+
+  chart = component.get('chart');
+  assert.equal(chart.datasets[0].points.length, 4);
+
+  // Update Data -- reset dataset
+  component.set('data', testData.get('lineData'));
+
+  chart = component.get('chart');
+  assert.equal(chart.datasets[0].points.length, 7);
 });
