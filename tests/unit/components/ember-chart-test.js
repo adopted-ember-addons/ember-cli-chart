@@ -126,6 +126,22 @@ var ChartTestData = Ember.Object.extend({
         ]
     };
   }),
+  lineData3: Ember.computed('lineData', function(){
+    var lineData = Ember.copy(this.get('lineData'), true);
+
+    // remove a datapoint from first dataset
+    lineData.datasets[0].data = lineData.datasets[0].data.slice(0, lineData.datasets[0].data.length-1);
+
+    return lineData;
+  }),
+  lineData4: Ember.computed('lineData', function(){
+    var lineData = Ember.copy(this.get('lineData'), true);
+
+    // remove a datapoint from second dataset
+    lineData.datasets[1].data = lineData.datasets[1].data.slice(0, lineData.datasets[1].data.length-1);
+
+    return lineData;
+  }),
   barData: Ember.computed(function(){
     return {
         labels: ["January", "February", "March"],
@@ -193,12 +209,12 @@ test('it should rebuild the legend in case the chart changes', function(assert) 
   });
 
   var chartParent = this.$().parent();
-  
+
   assert.ok(chartParent.find('.pie-legend').text().match(/Red/));
 
   // Update Data
   component.set('data', testData.get('pieData2'));
-  
+
   assert.ok(chartParent.find('.pie-legend').text().match(/Black/), 'The legend should have updated');
 });
 
@@ -317,7 +333,7 @@ test('it should update pie chart if data structure changes', function(assert) {
   assert.equal(segments.length, 3);
 });
 
-test('it should rebuild line chart if data structure changes', function(assert) {
+test('it should rebuild line chart if # of data sets changes', function(assert) {
   var component = this.subject({
     type: 'Line',
     data: testData.get('lineData')
@@ -338,6 +354,44 @@ test('it should rebuild line chart if data structure changes', function(assert) 
 
   chart = component.get('chart');
   assert.equal(chart.datasets.length, 2);
+
+});
+
+test('it should rebuild line chart if # of data points changes', function(assert) {
+  var component = this.subject({
+    type: 'Line',
+    data: testData.get('lineData')
+  });
+
+  this.render();
+  var chart = component.get('chart');
+  assert.equal(chart.datasets.length, 2);
+
+  assert.equal(chart.datasets[0].points.length, 7);
+  assert.equal(chart.datasets[1].points.length, 7);
+
+  // Update Data -- decrease # of points in first dataset
+  assert.equal(testData.get('lineData3').datasets[0].data.length, 6);
+  assert.equal(testData.get('lineData3').datasets[1].data.length, 7);
+
+  component.set('data', testData.get('lineData3'));
+
+  chart = component.get('chart');
+  assert.equal(chart.datasets[0].points.length, 6);
+  assert.equal(chart.datasets[1].points.length, 7);
+
+  // reset data to 'lineData'
+  component.set('data', testData.get('lineData'));
+
+  // Update Data -- decrease # of points in second dataset
+  assert.equal(testData.get('lineData4').datasets[0].data.length, 7);
+  assert.equal(testData.get('lineData4').datasets[1].data.length, 6);
+
+  component.set('data', testData.get('lineData4'));
+
+  chart = component.get('chart');
+  assert.equal(chart.datasets[0].points.length, 7);
+  assert.equal(chart.datasets[1].points.length, 6);
 });
 
 test('it should rebuild bar chart if data structure changes', function(assert) {
