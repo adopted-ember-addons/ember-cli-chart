@@ -11,7 +11,7 @@ export default Ember.Component.extend({
     var data = this.get('data');
     var type = Ember.String.classify(this.get('type'));
     var options = Ember.merge({}, this.get('options'));
-
+    var redraw = this.get('redraw');
     var chart = new Chart(context)[type](data, options);
 
     if (this.get('legend')) {
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
       this.$().wrap("<div class='chart-parent'></div>");
       this.$().parent().append(legend);
     }
-
+    this.set('redraw', redraw);
     this.set('chart', chart);
     this.addObserver('data', this, this.updateChart);
     this.addObserver('data.[]', this, this.updateChart);
@@ -45,7 +45,7 @@ export default Ember.Component.extend({
       chart: chart
     }).updateByType();
 
-    if (redraw) {
+    if (this.get('redraw') || redraw) {
       this.willDestroyElement();
       this.didInsertElement();
     } else {
