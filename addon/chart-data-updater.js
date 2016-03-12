@@ -22,6 +22,12 @@ export default Ember.Object.extend({
       if (chart.datasets[0].bars.length !== datasets[0].data.length) {
         return this.set('redraw', true);
       }
+    } else if (typeof chart.datasets[0].points !== 'undefined') {
+      chart.datasets.forEach(function(value, index) {
+        if (chart.datasets[index].points.length !== datasets[index].data.length) {
+          return self.set('redraw', true);
+        }
+      });
     }
 
     // Update Labels
