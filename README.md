@@ -1,8 +1,8 @@
 # Ember Chart
 
-[![Build Status](https://travis-ci.org/aomra015/ember-cli-chart.svg)](https://travis-ci.org/aomra015/ember-cli-chart)
+[![Build Status](https://travis-ci.org/aomran/ember-cli-chart.svg)](https://travis-ci.org/aomran/ember-cli-chart)
 
-This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. This addon is tested on Ember-CLI v1.13.1 and uses the `ember-try` addon to test against Ember release, beta and canary.
+This is an Ember CLI addon for adding a [ChartJS](http://www.chartjs.org/) component. This addon is tested on Ember-CLI v1.13.15 and uses the `ember-try` addon to test against Ember v1.13.12 and the latest release.
 
 ### Installation
 
@@ -40,4 +40,3 @@ In your handlebars template just do:
 #### More Resources
 
 * [Screencast on creating bar charts with ember-cli-chart](https://www.emberscreencasts.com/posts/46-bar-charts-with-ember-cli-chart)
-
