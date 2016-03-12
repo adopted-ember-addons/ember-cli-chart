@@ -28,9 +28,13 @@ export default Ember.Controller.extend({
   }),
   lineValue1: 65,
   lineValue2: 59,
-  lineData: Ember.computed('lineValue1', 'lineValue2', function(){
+  lineLabel: "July",
+  lineData: Ember.computed('lineValue1', 'lineValue2', 'lineLabel', function(){
+    var labels = ["January", "February", "March", "April", "May", "June"];
+    labels.push( this.get('lineLabel') );
+
     return {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: labels,
         datasets: [
             {
                 label: "My First dataset",
