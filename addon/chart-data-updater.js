@@ -19,8 +19,16 @@ export default Ember.Object.extend({
     if (chart.datasets.length !== datasets.length) {
       return this.set('redraw', true);
     } else if (typeof chart.datasets[0].bars !== 'undefined') {
-      if (chart.datasets[0].bars.length !== datasets[0].data.length) {
-        return this.set('redraw', true);
+      for (var i=0; i<chart.datasets.length; i++) {
+        if (chart.datasets[i].bars.length !== datasets[i].data.length) {
+          return this.set('redraw', true);
+        }
+      }
+    } else if (typeof chart.datasets[0].points !== 'undefined') {
+      for (var j=0; j<chart.datasets.length; j++) {
+        if (chart.datasets[j].points.length !== datasets[j].data.length) {
+          return this.set('redraw', true);
+        }
       }
     }
 
