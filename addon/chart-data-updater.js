@@ -45,11 +45,13 @@ export default Ember.Object.extend({
 
             // Update tooltip labels
             chartDataset.bars[j].label = labels[j];
+            chartDataset.bars[j].datasetLabel = dataset.label;
           } else {
             chartDataset.points[j].value = item;
 
             // Update tooltip labels
             chartDataset.points[j].label = labels[j];
+            chartDataset.bars[j].datasetLabel = dataset.label;
           }
         });
       } catch (e) {
