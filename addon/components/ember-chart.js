@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   lineLegendTemp: "<ul class=\"<%=name.toLowerCase()%>-legend\" style=\"list-style-type: none;\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>;    width: 8px;height: 8px;display: inline-block;border-radius: 10px;border: solid;border-width: 2px;margin: 5px 5px 0 0;\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
   pieLegendTemp: "<ul class=\"<%=name.toLowerCase()%>-legend\" style=\"list-style-type: none;\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>;  width: 8px;height: 8px;display: inline-block;border-radius: 10px;border: solid;border-width: 2px;margin: 5px 5px 0 0;\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
 
+  datasets: Ember.computed.alias('data.datasets'),
 
   didInsertElement: function(){
     var context = this.get('element').getContext('2d');
@@ -44,6 +45,7 @@ export default Ember.Component.extend({
     this.set('chart', chart);
     this.addObserver('data', this, this.updateChart);
     this.addObserver('data.[]', this, this.updateChart);
+    this.addObserver('datasets.@each.label', this, this.updateChart);
     this.addObserver('options', this, this.updateChart);
   },
 
@@ -55,6 +57,7 @@ export default Ember.Component.extend({
     this.get('chart').destroy();
     this.removeObserver('data', this, this.updateChart);
     this.removeObserver('data.[]', this, this.updateChart);
+    this.addObserver('datasets.@each.label', this, this.updateChart);
     this.removeObserver('options', this, this.updateChart);
   },
 

@@ -180,6 +180,33 @@ var ChartTestData = Ember.Object.extend({
         ]
     };
   }),
+  barData2: Ember.computed(function(){
+    return Ember.Object.create({
+        labels: Ember.A(["January", "February", "March"]),
+        datasets: Ember.A([
+            Ember.Object.create({
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [55, 41, 80]
+            }),
+            Ember.Object.create({
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40]
+            })
+        ])
+    });
+  }),
 });
 
 var testData = ChartTestData.create();
@@ -405,4 +432,22 @@ test('it should rebuild line chart if data length within a set changes', functio
 
   chart = component.get('chart');
   assert.equal(chart.datasets[0].points.length, 7);
+});
+
+test('it should update a chart if label of dataset changes', function(assert) {
+  const data = testData.get('barData2');
+  var component = this.subject({
+    type: 'Bar',
+    data
+  });
+
+  this.render();
+  var chart = component.get('chart');
+  assert.ok(chart.datasets[0].bars.every((bar) => bar.datasetLabel === 'My First dataset'), 'label is set on each individual bar');
+
+  // Update data -- change label of first dataset
+  data.set('datasets.firstObject.label', 'Updated label');
+
+  chart = component.get('chart');
+  assert.ok(chart.datasets[0].bars.every((bar) => bar.datasetLabel === 'Updated label'), 'label on each individual bar is updated');
 });
