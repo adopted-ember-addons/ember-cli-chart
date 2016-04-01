@@ -406,3 +406,21 @@ test('it should rebuild line chart if data length within a set changes', functio
   chart = component.get('chart');
   assert.equal(chart.datasets[0].points.length, 7);
 });
+
+test('it should rebuild the chart (line -> bar) if the chart type changes', function(assert) {
+  var component = this.subject({
+    type: 'Line',
+    data: testData.get('lineData2')
+  });
+
+  this.render();
+  var chart = component.get('chart');
+  assert.equal(chart.datasets.length, 3);
+
+  // Update Type -- change to bar type
+  component.set('type', 'bar');
+
+  chart = component.get('chart');
+
+  assert.equal(chart.name, 'Bar');
+});
