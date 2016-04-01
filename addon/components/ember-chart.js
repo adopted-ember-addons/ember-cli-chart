@@ -10,9 +10,47 @@ export default Ember.Component.extend({
   pieLegendTemp: "<ul class=\"<%=name.toLowerCase()%>-legend\" style=\"list-style-type: none;\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>;  width: 8px;height: 8px;display: inline-block;border-radius: 10px;border: solid;border-width: 2px;margin: 5px 5px 0 0;\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
 
 
-  didInsertElement: function(){
-    var context = this.get('element').getContext('2d');
+  didInsertElement: function() {
+    var redraw = this.get('redraw');
+
+    var chart = this.createChart();
+
+    if (this.get('legend')) {
+      var legend = chart.generateLegend();
+      this.$().wrap("<div class='chart-parent'></div>");
+      this.$().parent().append(legend);
+    }
+    this.set('redraw', redraw);
+    this.set('chart', chart);
+    this.addObserver('data', this, this.updateChart);
+    this.addObserver('data.[]', this, this.updateChart);
+    this.addObserver('type', this, this.chartTypeChanged);
+    this.addObserver('options', this, this.updateChart);
+  },
+
+  willDestroyElement: function() {
+    if (this.get('legend')) {
+      this.$().parent().children('[class$=legend]').remove();
+    }
+
+    this.get('chart').destroy();
+    this.removeObserver('data', this, this.updateChart);
+    this.removeObserver('data.[]', this, this.updateChart);
+    this.removeObserver('type', this, this.chartTypeChanged);
+    this.removeObserver('options', this, this.updateChart);
+  },
+
+  chartTypeChanged: function() {
+    var existingChart = this.get('chart');
+    if (existingChart) {
+      existingChart.destroy();
+    }
+    this.set('chart', this.createChart());
+  },
+
+  createChart: function() {
     var data = this.get('data');
+    var context = this.get('element').getContext('2d');
     var type = Ember.String.classify(this.get('type'));
     var template;
     switch (type) {
@@ -30,35 +68,12 @@ export default Ember.Component.extend({
         break;
     }
     var options = Ember.merge({
-    legendTemplate : template
+      legendTemplate: template
     }, this.get('options'));
-    var redraw = this.get('redraw');
-    var chart = new Chart(context)[type](data, options);
-
-    if (this.get('legend')) {
-      var legend = chart.generateLegend();
-      this.$().wrap("<div class='chart-parent'></div>");
-      this.$().parent().append(legend);
-    }
-    this.set('redraw', redraw);
-    this.set('chart', chart);
-    this.addObserver('data', this, this.updateChart);
-    this.addObserver('data.[]', this, this.updateChart);
-    this.addObserver('options', this, this.updateChart);
+    return new Chart(context)[type](data, options);
   },
 
-  willDestroyElement: function(){
-    if (this.get('legend')) {
-      this.$().parent().children('[class$=legend]').remove();
-    }
-
-    this.get('chart').destroy();
-    this.removeObserver('data', this, this.updateChart);
-    this.removeObserver('data.[]', this, this.updateChart);
-    this.removeObserver('options', this, this.updateChart);
-  },
-
-  updateChart: function(){
+  updateChart: function() {
     var chart = this.get('chart');
     var data = this.get('data');
     var redraw = ChartDataUpdater.create({
