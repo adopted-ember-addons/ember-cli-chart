@@ -9,6 +9,13 @@ export default Ember.Component.extend({
   lineLegendTemp: "<ul class=\"<%=name.toLowerCase()%>-legend\" style=\"list-style-type: none;\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>;    width: 8px;height: 8px;display: inline-block;border-radius: 10px;border: solid;border-width: 2px;margin: 5px 5px 0 0;\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
   pieLegendTemp: "<ul class=\"<%=name.toLowerCase()%>-legend\" style=\"list-style-type: none;\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>;  width: 8px;height: 8px;display: inline-block;border-radius: 10px;border: solid;border-width: 2px;margin: 5px 5px 0 0;\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
 
+  /**
+   * This is where ember-chart will look to find the options to pass to the Chart.js chart.
+   * Subclasses may change this path to create a layer of indirection for the options, while
+   * preserving the same component API. This is useful if you want to extend this component to
+   * provide component-specific defaults in your own app.
+   */
+  optionsPath: 'options',
 
   didInsertElement: function(){
     var context = this.get('element').getContext('2d');
@@ -31,7 +38,7 @@ export default Ember.Component.extend({
     }
     var options = Ember.merge({
     legendTemplate : template
-    }, this.get('options'));
+    }, this.get(this.get('optionsPath')));
     var redraw = this.get('redraw');
     var chart = new Chart(context)[type](data, options);
 
@@ -44,7 +51,7 @@ export default Ember.Component.extend({
     this.set('chart', chart);
     this.addObserver('data', this, this.updateChart);
     this.addObserver('data.[]', this, this.updateChart);
-    this.addObserver('options', this, this.updateChart);
+    this.addObserver(this.get('optionsPath'), this, this.updateChart);
   },
 
   willDestroyElement: function(){
@@ -55,7 +62,7 @@ export default Ember.Component.extend({
     this.get('chart').destroy();
     this.removeObserver('data', this, this.updateChart);
     this.removeObserver('data.[]', this, this.updateChart);
-    this.removeObserver('options', this, this.updateChart);
+    this.removeObserver(this.get('optionsPath'), this, this.updateChart);
   },
 
   updateChart: function(){
@@ -79,4 +86,5 @@ export default Ember.Component.extend({
       this.$().parent().append(legend);
     }
   }
+
 });
