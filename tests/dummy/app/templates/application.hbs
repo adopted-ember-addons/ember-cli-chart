@@ -2,7 +2,7 @@
 
 <div>
 	<h3>Line Chart</h3>
-	{{ember-chart type='Line' data=lineData width=600 height=200 legend=true}}
+	{{ember-chart type='line' data=lineData width="600" height="200" options=options}}
 </div>
 
 <div>
@@ -22,7 +22,7 @@
 
 <div>
 	<h3>Pie Chart</h3>
-	{{ember-chart type='Pie' data=pieData width=200 height=200 legend=true}}
+	{{ember-chart type='pie' data=pieData width="200" height="200" options=options}}
 </div>
 
 <div>
@@ -36,22 +36,22 @@
 
 <div>
 	<h3>Doughnut Chart with Legend</h3>
-	{{ember-chart type='Doughnut' data=pieData width=200 height=200 legend=true}}
+	{{ember-chart type='doughnut' data=pieData width=200 height=200 options=options}}
 </div>
 
 <div>
 	<h3>Bar Chart</h3>
-	{{ember-chart type='Bar' data=barData width=600 height=200}}
+	{{ember-chart type='bar' data=barData width=600 height=200 options=options}}
 </div>
 
 <div>
 	<h3>Radar Chart</h3>
-	{{ember-chart type='radar' data=radarData width=400 height=400}}
+	{{ember-chart type='radar' data=radarData width=400 height=400 options=options}}
 </div>
 
 <div>
 	<h3>Polar Area Chart</h3>
-	{{ember-chart type='polar area' data=polarAreaData width=400 height=400}}
+	{{ember-chart type='polarArea' data=polarAreaData width=400 height=400 options=options}}
 </div>
 
 {{outlet}}
