@@ -59,6 +59,53 @@ var ChartTestData = Ember.Object.extend({
     ];
   }),
 
+  pieData3: Ember.computed(function(){
+    return [
+      {
+        value: 50,
+        color: "#000000",
+        highlight: "#000000",
+        label: "Black"
+      },
+      {
+        value: 100,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+      },
+      {
+        value: 101,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Yellow"
+      },
+      {
+        value: 200,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Blue"
+      },
+      {
+        value: 300,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "White"
+      },
+      {
+        value: 75,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Brown"
+      },
+      {
+        value: 65,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Pink"
+      }
+    ];
+  }),
+
   labelValue1: "January",
   lineValue1: 65,
   lineValue2: 59,
@@ -328,6 +375,26 @@ test('it should update pie chart if data structure changes', function(assert) {
   var component = this.subject({
     type: 'Pie',
     data: testData.get('pieData')
+  });
+
+  this.render();
+
+  // Update Data
+  component.set('data', testData.get('pieData2'));
+
+  var chart = component.get('chart');
+  var segments = Ember.A(chart.segments);
+
+  assert.equal(segments.findBy('label', 'Red').value, 310);
+  assert.equal(segments.findBy('label', 'Yellow').value, 101);
+  assert.equal(segments.findBy('label', 'Black').value, 20);
+  assert.equal(segments.length, 3);
+});
+
+test('it should update pie chart if data quantity changes', function(assert) {
+  var component = this.subject({
+    type: 'Pie',
+    data: testData.get('pieData3')
   });
 
   this.render();
