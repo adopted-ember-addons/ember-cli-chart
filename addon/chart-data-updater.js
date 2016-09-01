@@ -66,20 +66,9 @@ export default Ember.Object.extend({
     var chart = this.get('chart');
     var chartSegments = Ember.A(chart.segments);
 
-    chart.segments.forEach(function(segment, i) {
-      var updatedSegment = data.findBy('label', segment.label);
-      if (updatedSegment) {
-        // Same segment exists in new data
-        chart.segments[i].value = updatedSegment.value || 0;
-
-        // Update label
-        chart.segments[i].label = updatedSegment.label || '';
-
-      } else {
-        // Segment does not exist anymore in new data
-        chart.removeData(i);
-      }
-    });
+    while (chart.segments.length) {
+        chart.removeData();
+    }
 
     data.forEach(function(segment) {
       var currentSegment = chartSegments.findBy('label', segment.label);
