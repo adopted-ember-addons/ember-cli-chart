@@ -1,30 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  options: {
+    responsive: false
+  },
   pieValue1: 300,
   pieValue2: 50,
   pieValue3: 100,
   pieData: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
-    return [
-      {
-        value: parseInt(this.get('pieValue1')),
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-      },
-      {
-        value: parseInt(this.get('pieValue2')),
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: parseInt(this.get('pieValue3')),
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      }
-    ];
+    return {
+      labels: ['Red', "Green", "Yellow"],
+      datasets: [
+        {
+          data: [
+            parseInt(this.get('pieValue1')),
+            parseInt(this.get('pieValue2')),
+            parseInt(this.get('pieValue3'))
+          ],
+          backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C"],
+          hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870"]
+        }
+      ]
+    };
   }),
   lineValue1: 65,
   lineValue2: 59,
@@ -105,37 +102,30 @@ export default Ember.Controller.extend({
         }
     ]
   },
-  polarAreaData: [
-    {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-    {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-    },
-    {
-        value: 40,
-        color: "#949FB1",
-        highlight: "#A8B3C5",
-        label: "Grey"
-    },
-    {
-        value: 120,
-        color: "#4D5360",
-        highlight: "#616774",
-        label: "Dark Grey"
-    }
-
-  ]
+  polarAreaData: {
+    datasets: [{
+      data: [
+          11,
+          16,
+          7,
+          3,
+          14
+      ],
+      backgroundColor: [
+          "#FF6384",
+          "#4BC0C0",
+          "#FFCE56",
+          "#E7E9ED",
+          "#36A2EB"
+      ],
+      label: 'My dataset' // for legend
+    }],
+    labels: [
+      "Red",
+      "Green",
+      "Yellow",
+      "Grey",
+      "Blue"
+    ]
+  }
 });
