@@ -1,5 +1,5 @@
 import Ember from 'ember';
-/* global Chart */
+import Chart from 'npm:chart.js';
 
 export default Ember.Component.extend({
   tagName: 'canvas',
