@@ -1,7 +1,12 @@
+const RSVP = require('rsvp');
+
 module.exports = {
   normalizeEntityName: function() {},
 
   afterInstall: function() {
-    return this.addBowerPackageToProject('chartjs', '2.1.1');
+    return RSVP.all([
+      this.addPackageToProject('chart.js', '2.2.1'),
+      this.addAddonToProject('ember-browserify')
+    ]);
   }
 };

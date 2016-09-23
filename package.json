@@ -29,7 +29,9 @@
   "homepage": "https://github.com/aomran/ember-cli-chart",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
+    "chart.js": "^2.2.1",
     "ember-ajax": "0.7.1",
+    "ember-browserify": "1.1.11",
     "ember-cli": "2.5.0",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-dependency-checker": "^1.2.0",
