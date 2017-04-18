@@ -5,7 +5,7 @@ module.exports = {
 
   afterInstall: function() {
     return RSVP.all([
-      this.addPackageToProject('chart.js', '2.2.1'),
+      this.addPackageToProject('chart.js', '2.4.0'),
       this.addAddonToProject('ember-browserify')
     ]);
   }
