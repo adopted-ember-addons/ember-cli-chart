@@ -1,5 +1,5 @@
+/* global Chart */
 import Ember from 'ember';
-import Chart from 'npm:chart.js';
 
 export default Ember.Component.extend({
   tagName: 'canvas',
@@ -26,12 +26,15 @@ export default Ember.Component.extend({
     this.get('chart').destroy();
     this.removeObserver('data', this, this.updateChart);
     this.removeObserver('data.[]', this, this.updateChart);
+    this.removeObserver('options', this, this.updateChart);
   },
 
   updateChart: function(){
     var chart   = this.get('chart');
     var data    = this.get('data');
+    var options = this.get('options');
     chart.config.data = data;
+    chart.config.options = options;
     chart.update();
   }
 });
