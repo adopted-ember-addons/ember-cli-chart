@@ -27,7 +27,7 @@ In your handlebars template just do:
 #### Example
 
 ```
-{{ember-chart type='Pie' data=model.chartData width=200 height=200}}
+{{ember-chart type='pie' data=model.chartData width=200 height=200}}
 ```
 
 #### More Resources
