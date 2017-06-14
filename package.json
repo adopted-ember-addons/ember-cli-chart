@@ -49,6 +49,7 @@
     "loader.js": "^4.2.3"
   },
   "dependencies": {
+    "chart.js": "^2.5.0",
     "ember-cli-babel": "^5.1.7"
   },
   "ember-addon": {
