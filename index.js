@@ -3,8 +3,9 @@
 
 module.exports = {
   name: 'ember-cli-chart',
-  included: function included(app) {
-   this._super.included(app);
-   app.import(app.project.nodeModulesPath + '/chart.js/dist/Chart.js');
+  included: function(app, parentAddon) {
+    this._super.included.apply(this, arguments);
+    var target = (parentAddon || app);
+    target.import('vendor/Chart.js');
   }
 };
