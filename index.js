@@ -1,26 +1,42 @@
 /* eslint-env node */
-'use strict';
+const FastbootTransform = require('fastboot-transform');
 
 module.exports = {
   name: 'ember-cli-chart',
-  included: function() {
-    this._super.included.apply(this, arguments);
-
-    var app;
-
-    // If the addon has the _findHost() method (in ember-cli >= 2.7.0), we'll just
-    // use that.
-    if (typeof this._findHost === 'function') {
-      app = this._findHost();
-    } else {
-      // Otherwise, we'll use this implementation borrowed from the _findHost()
-      // method in ember-cli.
-      var current = this;
-      do {
-        app = current.app || app;
-      } while (current.parent.parent && (current = current.parent));
+  options: {
+  nodeAssets: {
+    'chart.js': {
+      vendor: {
+          srcDir: 'dist',
+          include: ['Chart.js'],
+          processTree(input) {
+            return FastbootTransform(input);
+          }
+        }
+      }
     }
-    
-    app.import(app.bowerDirectory + '/chartjs/dist/Chart.js');
+  },
+  included() {
+    this._super.included.apply(this, arguments);
+    this._ensureThisImport();
+
+    this.import('vendor/chart.js/Chart.js');
+  },
+  _ensureThisImport() {
+    if (!this.import) {
+      this._findHost = function findHostShim() {
+        let current = this;
+        let app;
+
+        do {
+          app = current.app || app;
+        } while (current.parent.parent && (current = current.parent));
+        return app;
+      };
+      this.import = function importShim(asset, options) {
+        let app = this._findHost();
+        app.import(asset, options);
+      };
+    }
   }
 };
