@@ -8,7 +8,6 @@ sudo: false
 cache:
   directories:
     - $HOME/.npm
-    - $HOME/.cache # includes bowers cache
 
 env:
   # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
@@ -26,13 +25,11 @@ matrix:
 
 before_install:
   - npm config set spin false
-  - npm install -g bower phantomjs-prebuilt
-  - bower --version
+  - npm install -g phantomjs-prebuilt
   - phantomjs --version
 
 install:
   - npm install
-  - bower install
 
 script:
   # Usually, it's ok to finish the test scenario without reverting

@@ -1,6 +1,0 @@
-{
-  "name": "ember-cli-chart",
-  "dependencies": {
-    "chartjs": "2.5.0"
-  }
-}
