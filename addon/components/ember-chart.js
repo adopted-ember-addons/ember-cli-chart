@@ -27,7 +27,10 @@ export default Ember.Component.extend({
 
   didUpdateAttrs() {
     this._super(...arguments);
-
+    this.updateChart();
+  },
+  
+  updateChart() {
     let chart   = this.get('chart');
     let data    = this.get('data');
     let options = this.get('options');
