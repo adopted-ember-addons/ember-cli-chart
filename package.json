@@ -6,14 +6,20 @@
     "doc": "doc",
     "test": "tests"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aomran/ember-cli-chart.git"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aomran/ember-cli-chart.git"
+  "dependencies": {
+    "ember-cli-babel": "^6.6.0",
+    "chart.js": "^2.7.0",
+    "fastboot-transform": "^0.1.2",
+    "ember-cli-node-assets": "^0.2.2"
   },
   "keywords": [
     "ember-addon"
@@ -27,29 +33,23 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
-    "ember-cli": "2.14.2",
-    "ember-cli-dependency-checker": "^2.0.1",
-    "ember-cli-eslint": "^4.2.0",
-    "ember-cli-htmlbars": "^2.0.3",
-    "ember-cli-htmlbars-inline-precompile": "^1.0.2",
+    "ember-cli": "~2.16.2",
+    "ember-cli-dependency-checker": "^2.0.0",
+    "ember-cli-eslint": "^4.0.0",
+    "ember-cli-htmlbars": "^2.0.1",
+    "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^4.0.0",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
-    "ember-cli-uglify": "^1.2.0",
+    "ember-cli-uglify": "^2.0.0",
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.0.0",
-    "ember-source": "~2.14.1",
+    "ember-source": "~2.16.0",
     "ember-welcome-page": "^3.0.0",
     "loader.js": "^4.2.3"
-  },
-  "dependencies": {
-    "chart.js": "^2.6.0",
-    "ember-cli-babel": "^6.5.0",
-    "fastboot-transform": "^0.1.2",
-    "ember-cli-node-assets": "^0.2.2"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
