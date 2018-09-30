@@ -4,6 +4,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'canvas',
   attributeBindings: ['width', 'height'],
+  plugins: [],
 
   didInsertElement() {
     this._super(...arguments);
@@ -11,11 +12,13 @@ export default Ember.Component.extend({
     let data    = this.get('data');
     let type    = this.get('type');
     let options = this.get('options');
+    let plugins = this.get('plugins');
 		
     let chart = new Chart(context, {
       type: type,
       data: data,
-      options: options
+      options: options,
+      plugins: plugins
     });
     this.set('chart', chart);
   },
