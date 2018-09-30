@@ -15,7 +15,7 @@ $ ember install ember-cli-chart
 In your handlebars template just do:
 
 ```
-{{ember-chart type=CHARTTYPE data=CHARTDATA options=CHARTOPTIONS width=CHARTWIDTH height=CHARTHEIGHT}}
+{{ember-chart type=CHARTTYPE data=CHARTDATA options=CHARTOPTIONS width=CHARTWIDTH height=CHARTHEIGHT plugins=CHARTPLUGINS}}
 ```
 
 * CHARTTYPE: String; one of the following -- `line`, `bar`, `radar`, `polarArea`, `pie` or `doughnut`.
@@ -23,6 +23,7 @@ In your handlebars template just do:
 * CHARTOPTIONS: Object; refer to the ChartJS documentation. This is optional.
 * CHARTWIDTH: Number; pixel width of the canvas element. Only applies if the chart is NOT responsive.
 * CHARTHEIGHT: Number; pixel height of the canvas element. Only applies if the chart is NOT responsive.
+* CHARTPLUGINS: Array; refer to ChartJS documentaion. This is optional.
 
 #### Example
 
