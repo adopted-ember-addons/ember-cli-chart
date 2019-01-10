@@ -37,8 +37,8 @@ export default Ember.Component.extend({
     let animate = this.get('animate');
 		
 		if (chart) {
-			chart.config.data = data;
-			chart.config.options = options;
+			chart.data = data;
+			chart.options = options;
 			if (animate) {
 				chart.update();
 			} else {
