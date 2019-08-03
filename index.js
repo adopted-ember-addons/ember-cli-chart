@@ -1,8 +1,9 @@
-/* eslint-env node */
+'use strict';
+
 const FastbootTransform = require('fastboot-transform');
 
 module.exports = {
-  name: 'ember-cli-chart',
+  name: require('./package').name,
   options: {
   nodeAssets: {
     'chart.js': {
