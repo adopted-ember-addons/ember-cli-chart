@@ -4,7 +4,12 @@ import Component from '@ember/component';
 export default Component.extend({
   tagName: 'canvas',
   attributeBindings: ['width', 'height'],
-  plugins: [],
+
+  init() {
+    this._super(...arguments);
+
+    this.plugins = this.plugins || [];
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -38,7 +43,7 @@ export default Component.extend({
     let data    = this.get('data');
     let options = this.get('options');
     let animate = this.get('animate');
-		
+
 		if (chart) {
 			chart.data = data;
 			chart.options = options;

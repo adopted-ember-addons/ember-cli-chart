@@ -2,8 +2,10 @@ import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  options: {
-    responsive: false
+  options: function() {
+    return {
+      responsive: false
+    }
   },
   pieValue1: 300,
   pieValue2: 50,
@@ -57,7 +59,7 @@ export default Controller.extend({
         ]
     };
   }),
-  barData: computed(function(){
+  barData: function() {
     return {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
@@ -78,9 +80,9 @@ export default Controller.extend({
               data: [28, 48, 40, 19, 86, 27, 90]
           }
       ]
-    };
-  }),
-  radarData: computed(function(){
+    }
+  },
+  radarData: function() {
     return {
       labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
       datasets: [
@@ -106,8 +108,8 @@ export default Controller.extend({
           }
       ]
     }
-  }),
-  polarAreaData: computed(function(){
+  },
+  polarAreaData: function() {
     return {
       datasets: [{
         data: [
@@ -133,6 +135,6 @@ export default Controller.extend({
         "Grey",
         "Blue"
       ]
-    };
-  })
+    }
+  }
 });
