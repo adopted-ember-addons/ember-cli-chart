@@ -35,15 +35,15 @@ export default Component.extend({
     let data    = this.get('data');
     let options = this.get('options');
     let animate = this.get('animate');
-
-    if (chart) {
-      chart.config.data = data;
-      chart.config.options = options;
-      if (animate) {
-        chart.update();
-      } else {
-        chart.update(0);
-      }
-    }
+		
+		if (chart) {
+			chart.data = data;
+			chart.options = options;
+			if (animate) {
+				chart.update();
+			} else {
+				chart.update(0);
+			}
+		}
   }
 });
