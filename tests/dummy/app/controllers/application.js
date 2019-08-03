@@ -1,12 +1,10 @@
-import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
 export default Controller.extend({
-  options: computed(function(){
-    return {
-      responsive: false
-    };
-  }),
+  options: {
+    responsive: false
+  },
   pieValue1: 300,
   pieValue2: 50,
   pieValue3: 100,
