@@ -1,7 +1,7 @@
 /* global Chart */
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'canvas',
   attributeBindings: ['width', 'height'],
 
@@ -11,7 +11,7 @@ export default Ember.Component.extend({
     let data    = this.get('data');
     let type    = this.get('type');
     let options = this.get('options');
-		
+
     let chart = new Chart(context, {
       type: type,
       data: data,
@@ -29,7 +29,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
     this.updateChart();
   },
-  
+
   updateChart() {
     let chart   = this.get('chart');
     let data    = this.get('data');

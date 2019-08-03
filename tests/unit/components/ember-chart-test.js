@@ -2,18 +2,18 @@ import {
   moduleForComponent,
   test
 } from 'ember-qunit';
-import Ember from 'ember';
+import EmberObject, { computed } from '@ember/object';
 
 moduleForComponent('ember-chart', 'EmberChartComponent', {
   unit: true
 });
 
 // Test Data
-let ChartTestData = Ember.Object.extend({
+let ChartTestData = EmberObject.extend({
   pieValue1: 300,
   pieValue2: 50,
   pieValue3: 100,
-  pieData: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
+  pieData: computed('pieValue1', 'pieValue2', 'pieValue3', function(){
     return {
       labels: ['Red', "Green", "Yellow"],
       datasets: [
@@ -30,7 +30,7 @@ let ChartTestData = Ember.Object.extend({
     };
   }),
 
-  pieData2: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
+  pieData2: computed('pieValue1', 'pieValue2', 'pieValue3', function(){
     return {
       labels: ["Black", "Red", "Yellow"],
       datasets: [
@@ -46,7 +46,7 @@ let ChartTestData = Ember.Object.extend({
   labelValue1: "January",
   lineValue1: 65,
   lineValue2: 59,
-  lineData: Ember.computed('lineValue1', 'lineValue2', 'labelValue1', function(){
+  lineData: computed('lineValue1', 'lineValue2', 'labelValue1', function(){
     return {
         labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -73,7 +73,7 @@ let ChartTestData = Ember.Object.extend({
         ]
     };
   }),
-  lineData2: Ember.computed(function(){
+  lineData2: computed(function(){
     return {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -110,7 +110,7 @@ let ChartTestData = Ember.Object.extend({
         ]
     };
   }),
-  lineData3: Ember.computed('lineValue1', 'lineValue2', 'labelValue1', function(){
+  lineData3: computed('lineValue1', 'lineValue2', 'labelValue1', function(){
     return {
         labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -137,7 +137,7 @@ let ChartTestData = Ember.Object.extend({
         ]
     };
   }),
-  barData: Ember.computed(function(){
+  barData: computed(function(){
     return {
         labels: ["January", "February", "March"],
         datasets: [
@@ -248,7 +248,7 @@ test('it should update pie charts dynamically', function(assert) {
   // Update Data
   testData.set('pieValue1', 600);
   component.set('data', testData.get('pieData'));
-	component.didUpdateAttrs();
+  component.didUpdateAttrs();
 
   chart = component.get('chart');
   assert.equal(chart.data.datasets[0].data[0], 600);
@@ -259,17 +259,17 @@ test('it should update charts dynamically', function(assert) {
   let component = this.subject({
     type: 'line',
     data: testData.get('lineData')
-	});
+  });
 
-	this.render();
+  this.render();
   let chart = component.get('chart');
   assert.equal(chart.data.datasets[0].data[0], 65);
 
   // Update Data
   testData.set('lineValue1', 105);
   component.set('data', testData.get('lineData'));
-	component.didUpdateAttrs();
-	
+  component.didUpdateAttrs();
+
   chart = component.get('chart');
   assert.equal(chart.data.datasets[0].data[0], 105);
 
@@ -277,7 +277,7 @@ test('it should update charts dynamically', function(assert) {
   // Update Labels
   testData.set('labelValue1', 'December');
   component.set('data', testData.get('lineData'));
-	component.didUpdateAttrs();
+  component.didUpdateAttrs();
 
   chart = component.get('chart');
   assert.equal(chart.data.labels[0], 'December');
