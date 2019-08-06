@@ -14,7 +14,7 @@ $ ember install ember-cli-chart
 
 In your handlebars template just do:
 
-```
+```hbs
 {{ember-chart type=CHARTTYPE data=CHARTDATA options=CHARTOPTIONS width=CHARTWIDTH height=CHARTHEIGHT plugins=CHARTPLUGINS}}
 ```
 
