@@ -13,6 +13,7 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
+
     let context = this.get('element');
     let data    = this.get('data');
     let type    = this.get('type');
@@ -25,6 +26,7 @@ export default Component.extend({
       options: options,
       plugins: plugins
     });
+
     this.set('chart', chart);
   },
 
@@ -52,6 +54,10 @@ export default Component.extend({
 			} else {
 				chart.update(0);
 			}
+
+      if (options.legendCallback && this.get('customLegendElement')) {
+        this.get('customLegendElement').innerHTML = chart.generateLegend();
+      }
 		}
   }
 });
