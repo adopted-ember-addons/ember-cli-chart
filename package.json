@@ -2,6 +2,19 @@
   "name": "ember-cli-chart",
   "version": "3.5.0",
   "description": "Ember component for ChartJS",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aomran/ember-cli-chart.git"
+  },
+  "license": "MIT",
+  "author": "Ahmed Omran",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
   "scripts": {
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
@@ -16,19 +29,6 @@
     "ember-cli-htmlbars": "^4.0.0",
     "ember-cli-node-assets": "^0.2.2",
     "fastboot-transform": "^0.1.2"
-  },
-  "keywords": [
-    "ember-addon"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aomran/ember-cli-chart.git"
-  },
-  "license": "MIT",
-  "author": "Ahmed Omran",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
   },
   "bugs": {
     "url": "https://github.com/aomran/ember-cli-chart/issues"
@@ -55,7 +55,6 @@
     "ember-source": "~3.13.0",
     "ember-source-channel-url": "^2.0.1",
     "ember-try": "^1.2.1",
-    "ember-welcome-page": "^3.0.0",
     "eslint-plugin-ember": "^7.1.0",
     "eslint-plugin-node": "^10.0.0",
     "loader.js": "^4.7.0",
