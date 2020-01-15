@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd my-addon`
+* `cd ember-cli-chart`
 * `npm install`
 
 ## Linting
