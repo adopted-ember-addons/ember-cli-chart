@@ -16,7 +16,15 @@ $ ember install ember-cli-chart
 In your handlebars template just do:
 
 ```hbs
-{{ember-chart type=CHARTTYPE data=CHARTDATA options=CHARTOPTIONS width=CHARTWIDTH height=CHARTHEIGHT plugins=CHARTPLUGINS}}
+{{ember-chart 
+  type=CHARTTYPE 
+  data=CHARTDATA 
+  options=CHARTOPTIONS 
+  width=CHARTWIDTH 
+  height=CHARTHEIGHT 
+  plugins=CHARTPLUGINS
+  customLegendElement=CUSTOMLEGENDELEMENT
+}}
 ```
 
 * CHARTTYPE: String; one of the following -- `line`, `bar`, `radar`, `polarArea`, `pie` or `doughnut`.
@@ -25,6 +33,7 @@ In your handlebars template just do:
 * CHARTWIDTH: Number; pixel width of the canvas element. Only applies if the chart is NOT responsive.
 * CHARTHEIGHT: Number; pixel height of the canvas element. Only applies if the chart is NOT responsive.
 * CHARTPLUGINS: Array; refer to ChartJS documentaion. This is optional.
+* CUSTOMLEGENDELEMENT: HTMLElement; A custom element to put a custom legend in, when using `legendCallback`. This is optional.
 
 #### Example
 
