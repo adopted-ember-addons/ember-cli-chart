@@ -7,7 +7,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    console.log(this.options);
+
     this.plugins = this.plugins || [];
   },
 
