@@ -1,9 +1,9 @@
 /* global Chart */
-import Component from '@ember/component';
+import Component from "@ember/component";
 
 export default Component.extend({
-  tagName: 'canvas',
-  attributeBindings: ['width', 'height'],
+  tagName: "canvas",
+  attributeBindings: ["width", "height"],
 
   init() {
     this._super(...arguments);
@@ -14,11 +14,11 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    let context = this.get('element');
-    let data    = this.get('data');
-    let type    = this.get('type');
-    let options = this.get('options');
-    let plugins = this.get('plugins');
+    let context = this.element;
+    let data = this.data;
+    let type = this.type;
+    let options = this.options;
+    let plugins = this.plugins;
 
     let chart = new Chart(context, {
       type: type,
@@ -27,12 +27,12 @@ export default Component.extend({
       plugins: plugins
     });
 
-    this.set('chart', chart);
+    this.set("chart", chart);
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    this.get('chart').destroy();
+    this.chart.destroy();
   },
 
   didUpdateAttrs() {
@@ -41,23 +41,23 @@ export default Component.extend({
   },
 
   updateChart() {
-    let chart   = this.get('chart');
-    let data    = this.get('data');
-    let options = this.get('options');
-    let animate = this.get('animate');
+    let chart = this.chart;
+    let data = this.data;
+    let options = this.options;
+    let animate = this.animate;
 
-		if (chart) {
-			chart.data = data;
-			chart.options = options;
-			if (animate) {
-				chart.update();
-			} else {
-				chart.update(0);
-			}
-
-      if (options.legendCallback && this.get('customLegendElement')) {
-        this.get('customLegendElement').innerHTML = chart.generateLegend();
+    if (chart) {
+      chart.data = data;
+      chart.options = options;
+      if (animate) {
+        chart.update();
+      } else {
+        chart.update(0);
       }
-		}
+
+      if (options.legendCallback && this.customLegendElement) {
+        this.customLegendElement.innerHTML = chart.generateLegend();
+      }
+    }
   }
 });

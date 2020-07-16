@@ -2,92 +2,56 @@
 
 <div>
   <h3>Line Chart</h3>
-  {{ember-chart
-    type="line"
-    data=lineData
-    width=600
-    height=200
-    options=options
-  }}
+  <EmberChart @type="line" @data={{this.lineData}} @width={{600}} @height={{200}} @options={{this.options}} />
 </div>
 
 <div>
   <h3>Line Chart Data Update</h3>
   <ul>
-    <li>{{input value=lineValue1 type="number"}}</li>
-    <li>{{input value=lineValue2 type="number"}}</li>
+    <li><Input @value={{this.lineValue1}} @type="number" /></li>
+    <li><Input @value={{this.lineValue2}} @type="number" /></li>
   </ul>
 </div>
 
 <div>
   <h3>Line Chart Label Update</h3>
   <ul>
-    <li>{{input value=lineLabel type="text"}}</li>
+    <li><Input @value={{this.lineLabel}} @type="text" /></li>
   </ul>
 </div>
 
 <div>
   <h3>Pie Chart</h3>
-  {{ember-chart
-    type="pie"
-    data=pieData
-    width=200
-    height=200
-    options=options
-  }}
+  <EmberChart @type="pie" @data={{this.this.pieData}} @width={{200}} @height={{200}} @options={{this.options}} />
 </div>
 
 <div>
   <h3>Pie Chart Update</h3>
   <ul>
-    <li>{{input value=pieValue1 type="number"}}</li>
-    <li>{{input value=pieValue2 type="number"}}</li>
-    <li>{{input value=pieValue3 type="number"}}</li>
+    <li><Input @value={{this.pieValue1}} @type="number" /></li>
+    <li><Input @value={{this.pieValue2}} @type="number" /></li>
+    <li><Input @value={{this.pieValue3}} @type="number" /></li>
   </ul>
 </div>
 
 <div>
   <h3>Doughnut Chart with Legend</h3>
-  {{ember-chart
-    type="doughnut"
-    data=pieData
-    width=200
-    height=200
-    options=options
-  }}
+  <EmberChart @type="doughnut" @data={{this.pieData}} @width={{200}} @height={{200}} @options={{this.options}} />
 </div>
 
 <div>
   <h3>Bar Chart</h3>
-  {{ember-chart
-    type="bar"
-    data=barData
-    width=600
-    height=200
-    options=options
-  }}
+  <EmberChart @type="bar" @data={{this.barData}} @width={{600}} @height={{200}} @options={{this.options}} />
 </div>
 
 <div>
   <h3>Radar Chart</h3>
-  {{ember-chart
-    type="radar"
-    data=radarData
-    width=400
-    height=400
-    options=options
-  }}
+  <EmberChart @type="radar" @data={{this.radarData}} @width={{400}} @height={{400}} @options={{this.options}} />
 </div>
 
 <div>
   <h3>Polar Area Chart</h3>
-  {{ember-chart
-    type="polarArea"
-    data=polarAreaData
-    width=400
-    height=400
-    options=options
-  }}
+  <EmberChart @type="polarArea" @data={{this.polarAreaData}} @width={{400}} @height={{400}} @options={{this.options}} />
 </div>
 
 {{outlet}}
