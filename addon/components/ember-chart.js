@@ -55,7 +55,7 @@ export default Component.extend({
         chart.update(0);
       }
 
-      if (options.legendCallback && this.customLegendElement) {
+      if (this.customLegendElement) {
         this.customLegendElement.innerHTML = chart.generateLegend();
       }
     }
