@@ -22,6 +22,7 @@ module.exports = {
     this._ensureThisImport();
 
     this.import('vendor/chart.js/Chart.js');
+    this.import('vendor/dashkit-extension.js');
   },
   _ensureThisImport() {
     if (!this.import) {
