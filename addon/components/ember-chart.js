@@ -1,50 +1,29 @@
 /* global Chart */
-import Component from "@ember/component";
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  tagName: "canvas",
-  attributeBindings: ["width", "height"],
+export default class EmberChart extends Component {
 
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
 
     this.plugins = this.plugins || [];
-  },
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    let context = this.element;
-    let data = this.data;
-    let type = this.type;
-    let options = this.options;
-    let plugins = this.plugins;
-
-    let chart = new Chart(context, {
-      type: type,
-      data: data,
-      options: options,
-      plugins: plugins
+  @action
+  drawChart(element) {
+    let { data, type, options, plugins } = this.args;
+    let chart = new Chart(element, {
+      type, data, options, plugins
     });
 
-    this.set("chart", chart);
-  },
+    this.chart = chart;
+  }
 
-  willDestroyElement() {
-    this._super(...arguments);
-    this.chart.destroy();
-  },
-
-  didUpdateAttrs() {
-    this._super(...arguments);
-    this.updateChart();
-  },
-
+  @action
   updateChart() {
-    let chart = this.chart;
-    let data = this.data;
-    let options = this.options;
-    let animate = this.animate;
+    let { chart, animate } = this.chart;
+    let { data, options } = this.args;
 
     if (chart) {
       chart.data = data;
@@ -60,4 +39,9 @@ export default Component.extend({
       }
     }
   }
-});
+
+  willDestroy() {
+    this.chart.destroy();
+  }
+
+}
