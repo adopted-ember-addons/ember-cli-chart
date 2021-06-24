@@ -4,7 +4,7 @@ import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
-module("EmberChartComponent", function(hooks) {
+module("EmberChartComponent", (hooks) => {
   setupRenderingTest(hooks);
 
   // Test Data
@@ -91,6 +91,7 @@ module("EmberChartComponent", function(hooks) {
         ]
       };
     }),
+
     lineData2: computed("lineValue1", "lineValue2", function() {
       return {
         labels: [
@@ -144,6 +145,7 @@ module("EmberChartComponent", function(hooks) {
         ]
       };
     }),
+
     lineData3: computed("lineValue1", "lineValue2", "labelValue1", function() {
       return {
         labels: [
@@ -179,6 +181,7 @@ module("EmberChartComponent", function(hooks) {
         ]
       };
     }),
+
     barData: computed(function() {
       return {
         labels: ["January", "February", "March"],
@@ -211,35 +214,35 @@ module("EmberChartComponent", function(hooks) {
   test("it can be a pie chart", async function(assert) {
     this.set("testData", ChartTestData.create().pieData);
 
-    await render(hbs`{{ember-chart type='pie' data=testData}}`);
+    await render(hbs`<EmberChart @type="pie" @data={{this.testData}} />`);
 
     assert.dom("canvas").exists();
   });
 
   test("it can be a line chart", async function(assert) {
     this.set("testData", ChartTestData.create().lineData);
-    await render(hbs`{{ember-chart type='line' data=testData}}`);
+    await render(hbs`<EmberChart @type="line" @data={{this.testData}} />`);
 
     assert.dom("canvas").exists();
   });
 
   test("it can be a bar chart", async function(assert) {
     this.set("testData", ChartTestData.create().lineData);
-    await render(hbs`{{ember-chart type='bar' data=testData}}`);
+    await render(hbs`<EmberChart @type="bar" @data={{this.testData}} />`);
 
     assert.dom("canvas").exists();
   });
 
-  test("it can be a Radar chart", async function(assert) {
+  test("it can be a radar chart", async function(assert) {
     this.set("testData", ChartTestData.create().lineData);
-    await render(hbs`{{ember-chart type='radar' data=testData}}`);
+    await render(hbs`<EmberChart @type="radar" @data={{this.testData}} />`);
 
     assert.dom("canvas").exists();
   });
 
-  test("it can be a Polar Area chart", async function(assert) {
+  test("it can be a polar area chart", async function(assert) {
     this.set("testData", ChartTestData.create().pieData);
-    await render(hbs`{{ember-chart type='polarArea' data=testData}}`);
+    await render(hbs`<EmberChart @type="polarArea" @data={{this.testData}} />`);
 
     assert.dom("canvas").exists();
   });
