@@ -1,16 +1,23 @@
-import { computed } from "@ember/object";
+import { tracked } from '@glimmer/tracking';
 import Controller from "@ember/controller";
 
-export default Controller.extend({
-  options: computed(function() {
+export default class ApplicationController extends Controller {
+  get options() {
     return {
       responsive: false
     };
-  }),
-  pieValue1: 300,
-  pieValue2: 50,
-  pieValue3: 100,
-  pieData: computed("pieValue1", "pieValue2", "pieValue3", function() {
+  }
+
+  @tracked
+  pieValue1 = 300;
+
+  @tracked
+  pieValue2 = 50;
+
+  @tracked
+  pieValue3 = 100;
+
+  get pieData() {
     return {
       labels: ["Red", "Green", "Yellow"],
       datasets: [
@@ -25,12 +32,19 @@ export default Controller.extend({
         }
       ]
     };
-  }),
-  lineValue1: 65,
-  lineValue2: 59,
-  lineLabel: "July",
-  lineData: computed("lineValue1", "lineValue2", "lineLabel", function() {
-    var labels = ["January", "February", "March", "April", "May", "June"];
+  }
+
+  @tracked
+  lineValue1 = 65;
+
+  @tracked
+  lineValue2 = 59;
+
+  @tracked
+  lineLabel = "July";
+
+  get lineData() {
+    const labels = ["January", "February", "March", "April", "May", "June"];
     labels.push(this.lineLabel);
 
     return {
@@ -66,8 +80,9 @@ export default Controller.extend({
         }
       ]
     };
-  }),
-  barData: function() {
+  }
+
+  get barData() {
     return {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
@@ -89,8 +104,9 @@ export default Controller.extend({
         }
       ]
     };
-  },
-  radarData: function() {
+  }
+
+  get radarData() {
     return {
       labels: [
         "Eating",
@@ -124,8 +140,9 @@ export default Controller.extend({
         }
       ]
     };
-  },
-  polarAreaData: function() {
+  }
+
+  get polarAreaData() {
     return {
       datasets: [
         {
@@ -143,4 +160,4 @@ export default Controller.extend({
       labels: ["Red", "Green", "Yellow", "Grey", "Blue"]
     };
   }
-});
+}
