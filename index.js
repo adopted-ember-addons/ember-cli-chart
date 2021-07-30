@@ -1,27 +1,11 @@
 'use strict';
 
-const FastbootTransform = require('fastboot-transform');
-
 module.exports = {
   name: require('./package').name,
-  options: {
-  nodeAssets: {
-    'chart.js': {
-      vendor: {
-          srcDir: 'dist',
-          include: ['chart.js'],
-          processTree(input) {
-            return FastbootTransform(input);
-          }
-        }
-      }
-    }
-  },
+
   included() {
     this._super.included.apply(this, arguments);
     this._ensureThisImport();
-
-    this.import('vendor/chart.js/chart.js');
   },
   _ensureThisImport() {
     if (!this.import) {
