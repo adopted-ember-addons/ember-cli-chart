@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import Chart from 'chart.js/auto';
 
 import 'chartjs-adapter-luxon';
-import 'chartjs-chart-financial/src/index';
+import 'temp-chartjs-candlestick'; // packaged version of chart-chartjs-financial
 
 export default class EmberChart extends Component {
   constructor() {
@@ -29,7 +29,7 @@ export default class EmberChart extends Component {
     if (this.chart) {
       this.chart.data = data;
       this.chart.options = options;
-      
+
       this.chart.update();
 
       if (this.customLegendElement) {
