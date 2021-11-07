@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/aomran/ember-cli-chart.svg)](https://travis-ci.org/aomran/ember-cli-chart)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-chart.svg)](https://emberobserver.com/addons/ember-cli-chart)
 
-This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v2.9).
+This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v3.5).
 
 ### Compatibility
 

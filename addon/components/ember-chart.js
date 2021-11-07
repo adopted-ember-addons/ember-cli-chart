@@ -1,12 +1,14 @@
-/* global Chart */
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
-export default class EmberChart extends Component {
+import Chart from 'chart.js/auto';
 
+import 'chartjs-adapter-luxon';
+import 'chartjs-chart-financial';
+
+export default class EmberChart extends Component {
   constructor() {
     super(...arguments);
-
     this.plugins = this.plugins || [];
   }
 
@@ -22,20 +24,16 @@ export default class EmberChart extends Component {
 
   @action
   updateChart() {
-    let { chart, animate } = this.chart;
     let { data, options } = this.args;
 
-    if (chart) {
-      chart.data = data;
-      chart.options = options;
-      if (animate) {
-        chart.update();
-      } else {
-        chart.update(0);
-      }
+    if (this.chart) {
+      this.chart.data = data;
+      this.chart.options = options;
+
+      this.chart.update();
 
       if (this.customLegendElement) {
-        this.customLegendElement.innerHTML = chart.generateLegend();
+        this.customLegendElement.innerHTML = this.chart.generateLegend();
       }
     }
   }
@@ -43,5 +41,4 @@ export default class EmberChart extends Component {
   willDestroy() {
     this.chart.destroy();
   }
-
 }

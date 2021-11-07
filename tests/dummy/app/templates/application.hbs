@@ -54,4 +54,16 @@
   <EmberChart @type="polarArea" @data={{this.polarAreaData}} @width={{400}} @height={{400}} @options={{this.options}} />
 </div>
 
+<div>
+  <h3>Candlestick Chart</h3>
+  <EmberChart @type="candlestick" @data={{this.candlestickData}} @width={{400}} @height={{400}} @options={{this.options}} />
+</div>
+
+<div>
+  <h3>OHLC Chart</h3>
+  <EmberChart @type="ohlc" @data={{this.ohlcData}} @width={{400}} @height={{400}}
+    @options={{this.options}} />
+</div>
+
+
 {{outlet}}
