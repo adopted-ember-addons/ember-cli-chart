@@ -4,9 +4,7 @@ import { action } from '@ember/object';
 import Chart from 'chart.js/auto';
 
 import 'chartjs-adapter-luxon';
-// import 'temp-chartjs-candlestick'; // packaged version of chart-chartjs-financial
-import { CandlestickController, OhlcController, CandlestickElement, OhlcElement } from 'temp-chartjs-candlestick';
-Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
+import 'chartjs-chart-financial';
 
 export default class EmberChart extends Component {
   constructor() {
