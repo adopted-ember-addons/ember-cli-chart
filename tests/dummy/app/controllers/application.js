@@ -1,17 +1,23 @@
-/* eslint-disable ember/no-classic-classes */
-import { computed } from '@ember/object';
 import Controller from '@ember/controller';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  options: computed(function () {
-    return {
+export default class ApplicationController extends Controller {
+  @tracked lineValue1 = 65;
+  @tracked lineValue2 = 59;
+  @tracked lineLabel = 'July';
+  @tracked pieValue1 = 300;
+  @tracked pieValue2 = 50;
+  @tracked pieValue3 = 100;
+
+  constructor() {
+    super(...arguments);
+
+    this.options = {
       responsive: false,
     };
-  }),
-  pieValue1: 300,
-  pieValue2: 50,
-  pieValue3: 100,
-  pieData: computed('pieValue1', 'pieValue2', 'pieValue3', function () {
+  }
+
+  get pieData() {
     return {
       labels: ['Red', 'Green', 'Yellow'],
       datasets: [
@@ -26,11 +32,9 @@ export default Controller.extend({
         },
       ],
     };
-  }),
-  lineValue1: 65,
-  lineValue2: 59,
-  lineLabel: 'July',
-  lineData: computed('lineValue1', 'lineValue2', 'lineLabel', function () {
+  }
+
+  get lineData() {
     var labels = ['January', 'February', 'March', 'April', 'May', 'June'];
     labels.push(this.lineLabel);
 
@@ -67,8 +71,9 @@ export default Controller.extend({
         },
       ],
     };
-  }),
-  barData: function () {
+  }
+
+  get barData() {
     return {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
@@ -90,8 +95,9 @@ export default Controller.extend({
         },
       ],
     };
-  },
-  radarData: function () {
+  }
+
+  get radarData() {
     return {
       labels: [
         'Eating',
@@ -125,8 +131,9 @@ export default Controller.extend({
         },
       ],
     };
-  },
-  polarAreaData: function () {
+  }
+
+  get polarAreaData() {
     return {
       datasets: [
         {
@@ -143,5 +150,5 @@ export default Controller.extend({
       ],
       labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue'],
     };
-  },
-});
+  }
+}
