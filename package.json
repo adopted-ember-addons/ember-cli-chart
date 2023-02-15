@@ -36,7 +36,7 @@
     "@ember/render-modifiers": "^2.0.5",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "chart.js": "^3.5.0",
+    "chart.js": "^4.2.1",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-htmlbars": "^5.7.1",
     "ember-cli-node-assets": "^0.2.2",
