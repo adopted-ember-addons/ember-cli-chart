@@ -5,17 +5,17 @@ const FastbootTransform = require('fastboot-transform');
 module.exports = {
   name: require('./package').name,
   options: {
-  nodeAssets: {
-    'chart.js': {
-      vendor: {
+    nodeAssets: {
+      'chart.js': {
+        vendor: {
           srcDir: 'dist',
           include: ['chart.js'],
           processTree(input) {
             return FastbootTransform(input);
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   },
   included() {
     this._super.included.apply(this, arguments);
@@ -39,5 +39,5 @@ module.exports = {
         app.import(asset, options);
       };
     }
-  }
+  },
 };
