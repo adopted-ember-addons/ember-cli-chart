@@ -3,7 +3,6 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 export default class EmberChart extends Component {
-
   constructor() {
     super(...arguments);
 
@@ -14,7 +13,10 @@ export default class EmberChart extends Component {
   drawChart(element) {
     let { data, type, options, plugins } = this.args;
     let chart = new Chart(element, {
-      type, data, options, plugins
+      type,
+      data,
+      options,
+      plugins,
     });
 
     this.chart = chart;
@@ -41,7 +43,7 @@ export default class EmberChart extends Component {
   }
 
   willDestroy() {
+    super.willDestroy(...arguments);
     this.chart.destroy();
   }
-
 }

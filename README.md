@@ -7,9 +7,9 @@ This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) 
 
 ### Compatibility
 
-- Ember.js v3.12 or above
-- Ember CLI v2.13 or above
-- Node.js v10 or above
+* Ember.js v3.20 or above
+* Ember CLI v3.20 or above
+* Node.js v12 or above
 
 ### Installation
 
@@ -22,14 +22,14 @@ $ ember install ember-cli-chart
 In your handlebars template just do:
 
 ```hbs
-{{ember-chart
-  type=CHARTTYPE
-  data=CHARTDATA
-  options=CHARTOPTIONS
-  width=CHARTWIDTH
-  height=CHARTHEIGHT
-  plugins=CHARTPLUGINS
-  customLegendElement=CUSTOMLEGENDELEMENT
+<EmberChart
+  @type={{CHARTTYPE}}
+  @data={{CHARTDATA}}
+  @options={{CHARTOPTIONS}}
+  @width={{CHARTWIDTH}}
+  @height={{CHARTHEIGHT}}
+  @plugins={{CHARTPLUGINS}}
+  @customLegendElement={{CUSTOMLEGENDELEMENT}}
 }}
 ```
 
@@ -44,7 +44,7 @@ In your handlebars template just do:
 #### Example
 
 ```
-{{ember-chart type='pie' data=model.chartData width=200 height=200}}
+<EmberChart @type="pie" @data={{model.chartData}} @width={{200}} @height={{200}} />
 ```
 
 #### More Resources
