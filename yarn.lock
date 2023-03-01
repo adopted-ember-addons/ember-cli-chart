@@ -9039,9 +9039,9 @@ minimalistic-crypto-utils@^1.0.1:
     brace-expansion "^1.1.7"
 
 minimist@^0.2.1:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.2.3.tgz#1a6e35403dd242d48ce38791aa910dee140f3e1c"
-  integrity sha512-cdOrRjzm/cI4sG1c1Kzgo5kpFQm61wrgADF89L2ONgCqlwWNCJ3L4DoOLamFIagKhdnRuC+4eWgdRB4OoibyuQ==
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.2.4.tgz#0085d5501e29033748a2f2a4da0180142697a475"
+  integrity sha512-Pkrrm8NjyQ8yVt8Am9M+yUt74zE3iokhzbG1bFVNjLB92vwM71hf40RkEsryg98BujhVOncKm/C1xROxZ030LQ==
 
 minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6:
   version "1.2.8"
