@@ -30,7 +30,7 @@ In your handlebars template just do:
   @height={{CHARTHEIGHT}}
   @plugins={{CHARTPLUGINS}}
   @customLegendElement={{CUSTOMLEGENDELEMENT}}
-}}
+/>
 ```
 
 - CHARTTYPE: String; one of the following -- `line`, `bar`, `radar`, `polarArea`, `pie` or `doughnut`.
