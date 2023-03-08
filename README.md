@@ -1,6 +1,6 @@
 # Ember Chart
 
-[![Build Status](https://travis-ci.org/aomran/ember-cli-chart.svg)](https://travis-ci.org/aomran/ember-cli-chart)
+[![CI](https://github.com/aomran/ember-cli-chart/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/aomran/ember-cli-chart/actions/workflows/ci.yml)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-chart.svg)](https://emberobserver.com/addons/ember-cli-chart)
 
 This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v3.5).
