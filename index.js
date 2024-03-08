@@ -1,7 +1,5 @@
 'use strict';
 
-const FastbootTransform = require('fastboot-transform');
-
 module.exports = {
   name: require('./package').name,
   options: {

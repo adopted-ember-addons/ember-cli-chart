@@ -1,15 +1,15 @@
 # Ember Chart
 
-[![Build Status](https://travis-ci.org/aomran/ember-cli-chart.svg)](https://travis-ci.org/aomran/ember-cli-chart)
+[![CI](https://github.com/aomran/ember-cli-chart/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/aomran/ember-cli-chart/actions/workflows/ci.yml)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-chart.svg)](https://emberobserver.com/addons/ember-cli-chart)
 
 This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v4.0).
 
 ### Compatibility
 
-- Ember.js v3.12 or above
-- Ember CLI v2.13 or above
-- Node.js v10 or above
+* Ember.js v3.20 or above
+* Ember CLI v3.20 or above
+* Node.js v12 or above
 
 ### Installation
 
@@ -22,15 +22,15 @@ $ ember install ember-cli-chart
 In your handlebars template just do:
 
 ```hbs
-{{ember-chart
-  type=CHARTTYPE
-  data=CHARTDATA
-  options=CHARTOPTIONS
-  width=CHARTWIDTH
-  height=CHARTHEIGHT
-  plugins=CHARTPLUGINS
-  customLegendElement=CUSTOMLEGENDELEMENT
-}}
+<EmberChart
+  @type={{CHARTTYPE}}
+  @data={{CHARTDATA}}
+  @options={{CHARTOPTIONS}}
+  @width={{CHARTWIDTH}}
+  @height={{CHARTHEIGHT}}
+  @plugins={{CHARTPLUGINS}}
+  @customLegendElement={{CUSTOMLEGENDELEMENT}}
+/>
 ```
 
 - CHARTTYPE: String; one of the following -- `line`, `bar`, `radar`, `polarArea`, `pie` or `doughnut`.
@@ -44,7 +44,7 @@ In your handlebars template just do:
 #### Example
 
 ```
-{{ember-chart type='pie' data=model.chartData width=200 height=200}}
+<EmberChart @type="pie" @data={{model.chartData}} @width={{200}} @height={{200}} />
 ```
 
 #### More Resources
