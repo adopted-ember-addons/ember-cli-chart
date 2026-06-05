@@ -1,23 +1,22 @@
 # Ember Chart
 
-[![CI](https://github.com/aomran/ember-cli-chart/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/aomran/ember-cli-chart/actions/workflows/ci.yml)
+[![CI](https://github.com/adopted-ember-addons/ember-cli-chart/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/adopted-ember-addons/ember-cli-chart/actions/workflows/ci.yml)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-chart.svg)](https://emberobserver.com/addons/ember-cli-chart)
 
-This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v3.5).
+This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v4.2).
 
-### Compatibility
+## Compatibility
 
-* Ember.js v3.20 or above
-* Ember CLI v3.20 or above
-* Node.js v12 or above
+- Ember.js v5.8 or above
+- Embroider or ember-auto-import v2
 
-### Installation
+## Installation
 
 ```
-$ ember install ember-cli-chart
+ember install ember-cli-chart
 ```
 
-### Usage
+## Usage 
 
 In your handlebars template just do:
 
@@ -50,3 +49,11 @@ In your handlebars template just do:
 #### More Resources
 
 - [Screencast on creating bar charts with ember-cli-chart](https://www.emberscreencasts.com/posts/46-bar-charts-with-ember-cli-chart)
+
+## Contributing
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).

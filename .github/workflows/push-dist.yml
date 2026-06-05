@@ -1,0 +1,34 @@
+# Because this library needs to be built,
+# we can't easily point package.json files at the git repo for easy cross-repo testing.
+#
+# This workflow brings back that capability by placing the compiled assets on a "dist" branch
+# (configurable via the "branch" option below)
+name: Push dist
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  push-dist:
+    name: Push dist
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - uses: kategengler/put-built-npm-package-contents-on-branch@5b33924ea713bcde29273ef55bac7e4142a7b917 # v2.0.0
+        with:
+          branch: dist
+          token: ${{ secrets.GITHUB_TOKEN }}
